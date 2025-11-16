@@ -26,7 +26,7 @@ services:
     ports:
       - "4000:4000"
     volumes:
-      - ./uploads:/app/uploads
+      - ./src/main/resources/static:/app/static
 
 volumes:
   db_data:
