@@ -41,18 +41,18 @@ public class GestioneAnnuncioController {
     private final HttpServletRequest httpServletRequest;
     private final ResourceLoader resourceLoader;
 
-    private final static String uploadsPath = "annunci";
+    private static final String uploadsPath = "annunci";
 
     @Value("${uploads.path}")
     private String uploadPath;
 
     @GetMapping("/visualizza-annuncio")
-    public ResponseEntity<String> getAnnuncio(@RequestParam long id) {
+    public ResponseEntity<String> getAnnuncio(@RequestParam final long id) {
         try {
-            Annuncio annuncio = gestioneAnnuncioService.getAnnuncio(id).orElse(null);
-            AnnuncioDTO item = new AnnuncioDTO().convertFromModel(annuncio);
+            final Annuncio annuncio = gestioneAnnuncioService.getAnnuncio(id).orElse(null);
+            final AnnuncioDTO item = new AnnuncioDTO().convertFromModel(annuncio);
 
-            String serverAddress = String.format(
+            final String serverAddress = String.format(
                     "%s://%s:%d",
                     httpServletRequest.getScheme(),
                     httpServletRequest.getServerName(),
@@ -68,21 +68,21 @@ public class GestioneAnnuncioController {
     }
 
     @GetMapping("/visualizza-annunci-utente")
-    public ResponseEntity<String> getAnnunciUtente(@RequestParam long id) {
+    public ResponseEntity<String> getAnnunciUtente(@RequestParam final long id) {
         try {
-            Utente u = gestioneAreaPersonaleService.getDatiPrivati(id);
-            List<Annuncio> annunci = gestioneAnnuncioService.findAllByUtente(u);
-            List<AnnuncioDTO> list = new ArrayList<>();
+            final Utente u = gestioneAreaPersonaleService.getDatiPrivati(id);
+            final List<Annuncio> annunci = gestioneAnnuncioService.findAllByUtente(u);
+            final List<AnnuncioDTO> list = new ArrayList<>();
 
-            String serverAddress = String.format(
+            final String serverAddress = String.format(
                     "%s://%s:%d",
                     httpServletRequest.getScheme(),
                     httpServletRequest.getServerName(),
                     httpServletRequest.getServerPort()
             );
 
-            for (Annuncio a : annunci) {
-                AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
+            for (final Annuncio a : annunci) {
+                final AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
                 item.setServerImage(a, serverAddress);
                 list.add(item);
             }
@@ -94,26 +94,26 @@ public class GestioneAnnuncioController {
     }
 
     @PostMapping(value = "aggiungi-annuncio")
-    public ResponseEntity<String> addAnnuncio(@ModelAttribute("model") AnnuncioDTO model,
-                                              @RequestParam("image") MultipartFile image) {
+    public ResponseEntity<String> addAnnuncio(@ModelAttribute("model") final AnnuncioDTO model,
+                                              @RequestParam("image") final MultipartFile image) {
 
         try {
-            ResponseDTO message = new ResponseDTO();
+            final ResponseDTO message = new ResponseDTO();
             message.message = "Dati inseriti non validi";
 
-            HashMap<String, String> tester = new HashMap<>();
+            final HashMap<String, String> tester = new HashMap<>();
             tester.put(model.getDescrizione(), "^[\\sa-zA-Z0-9.,:;'-èéòàùì]{1,1023}$");
             tester.put(model.getStrada(), "^[\\sa-zA-Z0-9.,:;'-èéòàùì]+$");
             tester.put(model.getCap(), "^[0-9]{5}$");
             tester.put(model.getNome(), "^[\\sa-zA-Z0-9.,'èéòàùì]{1,100}$");
             tester.put(model.getPrezzo().toString(), "^[0-9]{1,10}[.,][0-9]{2}$");
 
-            RegexTester regexTester = new RegexTester();
+            final RegexTester regexTester = new RegexTester();
             if (!regexTester.toTest(tester)) {
                 return responseService.InternalError(message);
             }
 
-            Annuncio item = new Annuncio();
+            final Annuncio item = new Annuncio();
             item.setNome(model.getNome());
             item.setStrada(model.getStrada());
             item.setCitta(model.getCitta());
@@ -124,17 +124,17 @@ public class GestioneAnnuncioController {
             item.setCondizione(Annuncio.EnumCondizione.valueOf(model.getCondizione().toUpperCase()));
             item.setDataFine(Date.valueOf(model.getDataFine()));
 
-            Utente user = gestioneAreaPersonaleService.getDatiPrivati(model.getIdUtente());
+            final Utente user = gestioneAreaPersonaleService.getDatiPrivati(model.getIdUtente());
             if (user != null)
                 item.setUtente(user);
 
-            Annuncio newItem = gestioneAnnuncioService.addAnnuncio(item);
+            final Annuncio newItem = gestioneAnnuncioService.addAnnuncio(item);
 
-            String basePath = uploadPath + "annunci/" + newItem.getId() + "/";
+            final String basePath = uploadPath + "annunci/" + newItem.getId() + "/";
             storageService.init(basePath);
 
             String fileName = storageService.generateRandomFileName();
-            String extension = image.getOriginalFilename()
+            final String extension = image.getOriginalFilename()
                     .substring(image.getOriginalFilename().lastIndexOf('.') + 1);
             fileName = fileName + "." + extension;
 
@@ -143,7 +143,7 @@ public class GestioneAnnuncioController {
 
             gestioneAnnuncioService.updateAnnuncio(newItem);
 
-            AnnuncioDTO annuncioDto = new AnnuncioDTO().convertFromModel(newItem);
+            final AnnuncioDTO annuncioDto = new AnnuncioDTO().convertFromModel(newItem);
             return responseService.Ok(annuncioDto);
 
         } catch (Exception ex) {
@@ -152,11 +152,11 @@ public class GestioneAnnuncioController {
     }
 
     @PostMapping(value = "modifica-annuncio")
-    public ResponseEntity<String> modifyAnnuncio(@ModelAttribute("model") AnnuncioDTO model,
-                                                 @RequestParam(value = "image", required = false) MultipartFile image) {
+    public ResponseEntity<String> modifyAnnuncio(@ModelAttribute("model") final AnnuncioDTO model,
+                                                 @RequestParam(value = "image", required = false) final MultipartFile image) {
 
         try {
-            Annuncio item = gestioneAnnuncioService.getAnnuncio(model.getId()).orElse(null);
+            final Annuncio item = gestioneAnnuncioService.getAnnuncio(model.getId()).orElse(null);
             if (item == null)
                 return responseService.InternalError();
 
@@ -170,18 +170,18 @@ public class GestioneAnnuncioController {
             item.setCondizione(Annuncio.EnumCondizione.valueOf(model.getCondizione().toUpperCase()));
             item.setDataFine(Date.valueOf(model.getDataFine()));
 
-            Utente user = gestioneAreaPersonaleService.getDatiPrivati(model.getIdUtente());
+            final Utente user = gestioneAreaPersonaleService.getDatiPrivati(model.getIdUtente());
             if (user != null)
                 item.setUtente(user);
 
-            Annuncio newItem = gestioneAnnuncioService.updateAnnuncio(item);
+            final Annuncio newItem = gestioneAnnuncioService.updateAnnuncio(item);
 
             if (image != null) {
-                String basePath = uploadPath + "annunci/" + newItem.getId() + "/";
+                final String basePath = uploadPath + "annunci/" + newItem.getId() + "/";
                 storageService.init(basePath);
 
                 String fileName = storageService.generateRandomFileName();
-                String extension = image.getOriginalFilename()
+                final String extension = image.getOriginalFilename()
                         .substring(image.getOriginalFilename().lastIndexOf('.') + 1);
                 fileName = fileName + "." + extension;
 
@@ -192,7 +192,7 @@ public class GestioneAnnuncioController {
                 gestioneAnnuncioService.updateAnnuncio(newItem);
             }
 
-            AnnuncioDTO annuncioDto = new AnnuncioDTO().convertFromModel(newItem);
+            final AnnuncioDTO annuncioDto = new AnnuncioDTO().convertFromModel(newItem);
             return responseService.Ok(annuncioDto);
 
         } catch (Exception ex) {
@@ -201,7 +201,7 @@ public class GestioneAnnuncioController {
     }
 
     @GetMapping("/delete-annuncio")
-    public ResponseEntity<String> deleteAnnuncio(@RequestParam long id) {
+    public ResponseEntity<String> deleteAnnuncio(@RequestParam final long id) {
         try {
             gestioneAnnuncioService.deleteAnnuncio(id);
             return responseService.Ok();
@@ -210,4 +210,3 @@ public class GestioneAnnuncioController {
         }
     }
 }
-
