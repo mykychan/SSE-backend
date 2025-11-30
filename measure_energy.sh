@@ -2,12 +2,12 @@
 
 # This script measures the energy consumption of the Spring Boot backend.
 # Usage:
-#   ./measure-energy-backend.sh /path/to/EnergiBridge [seconds]
+#   ./measure-energy-backend.sh /path/to/EnergiBridge [seconds] /path/to/output-dir
 
-# Check argument
+# Check arguments
 if [ -z "$1" ]; then
   echo "Error: You must specify the path to the EnergiBridge directory."
-  echo "Usage: ./measure-energy-backend.sh /path/to/EnergiBridge [seconds]"
+  echo "Usage: ./measure-energy-backend.sh /path/to/EnergiBridge [seconds] /path/to/output-dir"
   exit 1
 fi
 
@@ -16,6 +16,15 @@ ENERGIBRIDGE_BIN="$ENERGIBRIDGE_DIR/target/release/energibridge"
 
 # Default measurement time is 15 seconds
 MEASURE_TIME="${2:-15}"
+
+# Check output directory argument
+if [ -z "$3" ]; then
+  echo "Error: You must specify the output directory."
+  echo "Usage: ./measure-energy-backend.sh /path/to/EnergiBridge [seconds] /path/to/output-dir"
+  exit 1
+fi
+
+OUTPUT_DIR="$3"
 
 # Check energibridge binary
 if [ ! -f "$ENERGIBRIDGE_BIN" ]; then
@@ -53,8 +62,7 @@ if [ -z "$JAR_FILE" ]; then
   exit 1
 fi
 
-# Create output directory
-OUTPUT_DIR="sse-reports/energibridge"
+# Create output directory if not exists
 mkdir -p "$OUTPUT_DIR"
 
 echo "---------------------------------------------"
@@ -80,4 +88,3 @@ echo ""
 echo "---------------------------------------------"
 echo " Energy report saved: $OUTPUT_FILE"
 echo "---------------------------------------------"
-
