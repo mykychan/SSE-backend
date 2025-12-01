@@ -30,6 +30,12 @@ if [ ! -f "$META_FILE" ]; then
   exit 1
 fi
 
+# Gather system information
+CPU_MODEL=$(lscpu | grep "Model name" | sed 's/Model name:\s*//')
+CPU_CORES=$(nproc)
+TOTAL_MEM=$(free -h | awk '/Mem:/ {print $2}')
+OS_INFO=$(uname -a)
+
 # Extract ThreadGroup parameters
 THREADS=$(grep -oP '(?<=<intProp name="ThreadGroup.num_threads">)\d+' "$JMX_FILE")
 RAMP_UP=$(grep -oP '(?<=<intProp name="ThreadGroup.ramp_time">)\d+' "$JMX_FILE")
@@ -46,6 +52,14 @@ END_TIME=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Append metadata
 {
+  echo ""
+  echo "System Metadata"
+  echo "-------------------------"
+  echo "CPU Model:      $CPU_MODEL"
+  echo "CPU Cores:      $CPU_CORES"
+  echo "Total Memory:   $TOTAL_MEM"
+  echo "OS:             $OS_INFO"
+
   echo ""
   echo "JMeter Load Test Metadata"
   echo "-------------------------"
