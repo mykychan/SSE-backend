@@ -48,23 +48,23 @@ sudo chmod g+r /dev/cpu/*/msr 2>/dev/null
 sudo setcap cap_sys_rawio=ep "$ENERGIBRIDGE_BIN"
 
 # Check .env file
-if [ ! -f ".env" ]; then
-  echo "Error: .env file not found in the current directory."
+if [ ! -f "../.env" ]; then
+  echo "Error: .env file not found in ../"
   exit 1
 fi
 
 # Export .env variables
 set -a
-source .env
+source ../.env
 set +a
 
 # Replace 'db' with 'localhost' inside SPRING_DATASOURCE_URL
 SPRING_DATASOURCE_URL=$(echo "$SPRING_DATASOURCE_URL" | sed 's#mysql://db:#mysql://localhost:#')
 
 # Detect JAR file
-JAR_FILE=$(ls target/*.jar 2>/dev/null | head -n 1)
+JAR_FILE=$(ls ../target/*.jar 2>/dev/null | head -n 1)
 if [ -z "$JAR_FILE" ]; then
-  echo "Error: No .jar file found in target/."
+  echo "Error: No .jar file found in ../target/."
   exit 1
 fi
 
@@ -79,9 +79,23 @@ echo "Output directory:   $OUTPUT_DIR"
 echo "---------------------------------------------"
 echo ""
 
-# Generate timestamped CSV filename
+# Generate timestamped CSV filename and metadata
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 OUTPUT_FILE="$OUTPUT_DIR/energy-backend-$TIMESTAMP.csv"
+META_FILE="$OUTPUT_DIR/metadata.txt"
+
+# Save metadata
+{
+  echo "EnergiBridge Backend Measurement Metadata"
+  echo "----------------------------------------"
+  echo "Date: $(date)"
+  echo "Command: $0 $*"
+  echo ""
+  echo "EnergiBridge directory: $ENERGIBRIDGE_DIR"
+  echo "Duration (seconds): $MEASURE_TIME"
+  echo "Output directory: $OUTPUT_DIR"
+  echo "JAR file: $JAR_FILE"
+} > "$META_FILE"
 
 # Export patched env vars for Spring Boot
 export SPRING_DATASOURCE_URL
@@ -93,4 +107,6 @@ export SPRING_DATASOURCE_URL
 echo ""
 echo "---------------------------------------------"
 echo " Energy report saved: $OUTPUT_FILE"
+echo " Metadata saved:      $META_FILE"
 echo "---------------------------------------------"
+
