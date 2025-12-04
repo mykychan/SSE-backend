@@ -1,0 +1,25 @@
+
+System Metadata
+-------------------------
+CPU Model:      12th Gen Intel(R) Core(TM) i7-12700KF
+CPU Cores:      20
+Total Memory:   31Gi
+OS:             Linux axel 6.17.9-arch1-1 #1 SMP PREEMPT_DYNAMIC Mon, 24 Nov 2025 15:21:09 +0000 x86_64 GNU/Linux
+
+JMeter Load Test Metadata
+-------------------------
+Start time:  2025-12-04 20:07:56
+End time:    2025-12-04 20:08:58
+JMX file:    load_test.jmx
+
+Thread count: 200
+Ramp-up:      20
+Duration:     60
+Delay:        0
+
+Endpoints used:
+/api/ricerca/all
+/api/ricerca/premium
+/api/annuncio/visualizza-annuncio
+/api/annuncio/visualizza-annunci-utente
+/api/valutazione/visualizza-valutazioni-annuncio
