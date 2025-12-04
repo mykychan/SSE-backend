@@ -36,14 +36,14 @@ CPU_CORES=$(nproc)
 TOTAL_MEM=$(free -h | awk '/Mem:/ {print $2}')
 OS_INFO=$(uname -a)
 
-# Extract ThreadGroup parameters
-THREADS=$(grep -oP '(?<=<intProp name="ThreadGroup.num_threads">)\d+' "$JMX_FILE")
-RAMP_UP=$(grep -oP '(?<=<intProp name="ThreadGroup.ramp_time">)\d+' "$JMX_FILE")
-DURATION=$(grep -oP '(?<=<longProp name="ThreadGroup.duration">)\d+' "$JMX_FILE")
-DELAY=$(grep -oP '(?<=<longProp name="ThreadGroup.delay">)\d+' "$JMX_FILE")
+# Extract multiple ThreadGroup parameters
+THREADS_LIST=($(grep -oP '(?<=<intProp name="ThreadGroup.num_threads">)\d+' "$JMX_FILE"))
+RAMPUP_LIST=($(grep -oP '(?<=<intProp name="ThreadGroup.ramp_time">)\d+' "$JMX_FILE"))
+DURATION_LIST=($(grep -oP '(?<=<longProp name="ThreadGroup.duration">)\d+' "$JMX_FILE"))
+DELAY_LIST=($(grep -oP '(?<=<longProp name="ThreadGroup.delay">)\d+' "$JMX_FILE"))
 
-# Extract endpoints
-ENDPOINTS=$(grep -oP '(?<=<stringProp name="HTTPSampler.path">).*(?=</stringProp>)' "$JMX_FILE")
+# Extract unique endpoints
+ENDPOINTS=$(grep -oP '(?<=<stringProp name="HTTPSampler.path">).*(?=</stringProp>)' "$JMX_FILE" | sort -u)
 
 # Run JMeter
 START_TIME=$(date +"%Y-%m-%d %H:%M:%S")
@@ -61,19 +61,24 @@ END_TIME=$(date +"%Y-%m-%d %H:%M:%S")
   echo "OS:             $OS_INFO"
 
   echo ""
-  echo "JMeter Load Test Metadata"
+  echo "JMeter Test Metadata"
   echo "-------------------------"
   echo "Start time:  $START_TIME"
   echo "End time:    $END_TIME"
   echo "JMX file:    $JMX_FILE"
   echo ""
-  echo "Thread count: $THREADS"
-  echo "Ramp-up:      $RAMP_UP"
-  echo "Duration:     $DURATION"
-  echo "Delay:        $DELAY"
+
+  echo "Thread Groups:"
+  echo "-------------------------"
+  for i in "${!THREADS_LIST[@]}"; do
+    echo "TG$((i+1)) -> threads: ${THREADS_LIST[$i]}, ramp-up: ${RAMPUP_LIST[$i]}, duration: ${DURATION_LIST[$i]}, delay: ${DELAY_LIST[$i]}"
+  done
+
   echo ""
   echo "Endpoints used:"
+  echo "-------------------------"
   echo "$ENDPOINTS"
+
 } >> "$META_FILE"
 
 echo "JMeter metadata appended to: $META_FILE"

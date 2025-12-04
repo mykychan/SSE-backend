@@ -6,20 +6,20 @@ CPU Cores:      20
 Total Memory:   31Gi
 OS:             Linux axel 6.17.9-arch1-1 #1 SMP PREEMPT_DYNAMIC Mon, 24 Nov 2025 15:21:09 +0000 x86_64 GNU/Linux
 
-JMeter Load Test Metadata
+JMeter Test Metadata
 -------------------------
-Start time:  2025-12-04 20:16:44
-End time:    2025-12-04 20:17:46
+Start time:  2025-12-04 21:29:38
+End time:    2025-12-04 21:30:41
 JMX file:    stress_test.jmx
 
-Thread count: 2000
-Ramp-up:      10
-Duration:     60
-Delay:        0
+Thread Groups:
+-------------------------
+TG1 -> threads: 2000, ramp-up: 10, duration: 60, delay: 0
 
 Endpoints used:
-/api/ricerca/all
-/api/ricerca/premium
+-------------------------
 /api/annuncio/visualizza-annuncio
 /api/annuncio/visualizza-annunci-utente
+/api/ricerca/all
+/api/ricerca/premium
 /api/valutazione/visualizza-valutazioni-annuncio
