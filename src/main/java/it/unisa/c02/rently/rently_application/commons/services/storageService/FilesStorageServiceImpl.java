@@ -88,7 +88,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 
         final StringBuilder sb = new StringBuilder(n);
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; ++i) {
             final int index
                     = (int) (AlphaNumericString.length()
                     * Math.random());
