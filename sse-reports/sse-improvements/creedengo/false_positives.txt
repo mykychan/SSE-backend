@@ -1,0 +1,3 @@
+The remaining warnings are false positives, mainly involving JPA entities, DTOs, and Spring components. These classes require mutable fields for serialization and deserialization, and final can interfere with Hibernate’s reflection and proxy mechanisms.
+
+JMH benchmark files were excluded for the same reason, as the reported issues were not meaningful in the context of microbenchmark code.
