@@ -28,7 +28,7 @@ public class ValutazioneDTO {
      * @param valutatore id dell'utente che ha effettuato la valutazione.
      * @param noleggio id del noleggio associato all'annuncio.
      */
-    public ValutazioneDTO(int voto, String descrizione, long valutato, long valutatore, long noleggio) {
+    public ValutazioneDTO(final int voto, final String descrizione, final long valutato, final long valutatore, final long noleggio) {
         this.voto = voto;
         this.descrizione = descrizione;
         this.valutato = valutato;
@@ -67,8 +67,8 @@ public class ValutazioneDTO {
      * @param vo ValutazioneOggetto da convertire in DTO
      * @return il DTO convertito dal ValutazioneOggetto
      */
-    public ValutazioneDTO convertFromValutazioneOggetto(ValutazioneOggetto vo) {
-        ValutazioneDTO item = new ValutazioneDTO();
+    public ValutazioneDTO convertFromValutazioneOggetto(final ValutazioneOggetto vo) {
+        final ValutazioneDTO item = new ValutazioneDTO();
         item.setDescrizione(vo.getDescrizione());
         item.setVoto(vo.getVoto());
         item.setValutato(vo.getAnnuncio().getId());
@@ -83,8 +83,8 @@ public class ValutazioneDTO {
      * @param vu ValutazioneUtente da convertire in DTO
      * @return il DTO convertito dal ValutazioneUtente
      */
-    public ValutazioneDTO convertFromValutazioneUtente(ValutazioneUtente vu) {
-        ValutazioneDTO item = new ValutazioneDTO();
+    public ValutazioneDTO convertFromValutazioneUtente(final ValutazioneUtente vu) {
+        final ValutazioneDTO item = new ValutazioneDTO();
         item.setDescrizione(vu.getDescrizione());
         item.setVoto(vu.getVoto());
         item.setValutato(vu.getValutato().getId());

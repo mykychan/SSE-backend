@@ -25,7 +25,7 @@ public class GestioneAutenticazioneServiceImpl implements GestioneAutenticazione
      * {@inheritDoc}
      */
     @Override
-    public Utente login(String email, String password) {
+    public Utente login(final String email, final String password) {
         return autenticazioneDAO.findByEmailAndPassword(email, password);
     }
 
@@ -33,7 +33,7 @@ public class GestioneAutenticazioneServiceImpl implements GestioneAutenticazione
      * {@inheritDoc}
      */
     @Override
-    public boolean checkEmail(String email) {
+    public boolean checkEmail(final String email) {
         return autenticazioneDAO.existsByEmail(email);
     }
 
@@ -41,7 +41,7 @@ public class GestioneAutenticazioneServiceImpl implements GestioneAutenticazione
      * {@inheritDoc}
      */
     @Override
-    public boolean checkUsername(String username) {
+    public boolean checkUsername(final String username) {
         return autenticazioneDAO.existsByUsername(username);
     }
 
@@ -49,7 +49,7 @@ public class GestioneAutenticazioneServiceImpl implements GestioneAutenticazione
      * {@inheritDoc}
      */
     @Override
-    public void signUp(Utente utente) throws NoSuchAlgorithmException {
+    public void signUp(final Utente utente) throws NoSuchAlgorithmException {
         if (!checkEmail(utente.getEmail()) && !checkUsername(utente.getUsername())) {
             utente.setPassword(utente.getPassword());
             autenticazioneDAO.save(utente);

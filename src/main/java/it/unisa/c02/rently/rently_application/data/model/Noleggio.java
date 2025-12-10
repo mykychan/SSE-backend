@@ -36,7 +36,7 @@ public class Noleggio {
      * @param noleggiatore Utente che possiede l'oggetto del noleggio.
      * @param annuncio Annuncio associato al noleggio.
      */
-    public Noleggio(EnumStato stato, BigDecimal prezzoTotale, Date dataInizio, Date dataFine, Date dataRichiesta, Utente noleggiante, Utente noleggiatore, Annuncio annuncio) {
+    public Noleggio(final EnumStato stato, final BigDecimal prezzoTotale, final Date dataInizio, final Date dataFine, final Date dataRichiesta, final Utente noleggiante, final Utente noleggiatore, final Annuncio annuncio) {
         this.stato = stato;
         this.prezzoTotale = prezzoTotale;
         this.dataInizio = dataInizio;
@@ -59,7 +59,7 @@ public class Noleggio {
      * @param noleggiatore Utente che possiede l'oggetto del noleggio.
      * @param annuncio Annuncio associato al noleggio.
      */
-    public Noleggio(long id, EnumStato stato, BigDecimal prezzoTotale, Date dataInizio, Date dataFine, Date dataRichiesta, Utente noleggiante, Utente noleggiatore, Annuncio annuncio) {
+    public Noleggio(final long id, final EnumStato stato, final BigDecimal prezzoTotale, final Date dataInizio, final Date dataFine, final Date dataRichiesta, final Utente noleggiante, final Utente noleggiatore, final Annuncio annuncio) {
         this.id = id;
         this.stato = stato;
         this.prezzoTotale = prezzoTotale;

@@ -65,20 +65,20 @@ public class ValutazioneControllerTest {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testAggiungiValutazioneUtente() throws Exception {
 
-        ValutazioneDTO valutazioneUtenteDTO = new ValutazioneDTO(8, "Transazione veloce e comunicazione cordiale.", 1, 2, 1);
+        final ValutazioneDTO valutazioneUtenteDTO = new ValutazioneDTO(8, "Transazione veloce e comunicazione cordiale.", 1, 2, 1);
 
-        Utente mockUtente1 = new Utente(1, "user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
-        Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
+        final Utente mockUtente1 = new Utente(1, "user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
+        final Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
 
         given(areaPersonaleService.getDatiPrivati(1)).willReturn(mockUtente1);
         given(areaPersonaleService.getDatiPrivati(2)).willReturn(mockUtente1);
 
-        Annuncio annuncio1 = new Annuncio(1l, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
-        Noleggio mockNoleggio = new Noleggio(1, Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, annuncio1);
+        final Annuncio annuncio1 = new Annuncio(1l, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
+        final Noleggio mockNoleggio = new Noleggio(1, Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, annuncio1);
 
         given(noleggioService.getNoleggio(1)).willReturn(mockNoleggio);
 
-        ValutazioneUtente valutazioneUtente = new ValutazioneUtente(8, "Transazione veloce e comunicazione cordiale.", mockUtente1, mockUtente2, mockNoleggio);
+        final ValutazioneUtente valutazioneUtente = new ValutazioneUtente(8, "Transazione veloce e comunicazione cordiale.", mockUtente1, mockUtente2, mockNoleggio);
 
         given(valutazioneService.addValutazioneUtente(any(ValutazioneUtente.class))).willReturn(valutazioneUtente);
 
@@ -95,16 +95,16 @@ public class ValutazioneControllerTest {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testAggiungiValutazioneUtenteReturnServerErrorVoto() throws Exception {
 
-        ValutazioneDTO valutazioneUtenteDTO = new ValutazioneDTO(15, "Transazione veloce e comunicazione cordiale.", 1, 2, 1);
+        final ValutazioneDTO valutazioneUtenteDTO = new ValutazioneDTO(15, "Transazione veloce e comunicazione cordiale.", 1, 2, 1);
 
-        Utente mockUtente1 = new Utente(1, "user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
-        Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
+        final Utente mockUtente1 = new Utente(1, "user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
+        final Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
 
         given(areaPersonaleService.getDatiPrivati(1)).willReturn(mockUtente1);
         given(areaPersonaleService.getDatiPrivati(2)).willReturn(mockUtente1);
 
-        Annuncio annuncio1 = new Annuncio(1l, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
-        Noleggio mockNoleggio = new Noleggio(1, Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, annuncio1);
+        final Annuncio annuncio1 = new Annuncio(1l, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
+        final Noleggio mockNoleggio = new Noleggio(1, Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, annuncio1);
 
         given(noleggioService.getNoleggio(1)).willReturn(mockNoleggio);
 
@@ -119,16 +119,16 @@ public class ValutazioneControllerTest {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testAggiungiValutazioneUtenteReturnServerError() throws Exception {
 
-        ValutazioneDTO valutazioneUtenteDTO = new ValutazioneDTO(15, "Transazione veloce e comunicazione cordiale.", 1, 2, 1);
+        final ValutazioneDTO valutazioneUtenteDTO = new ValutazioneDTO(15, "Transazione veloce e comunicazione cordiale.", 1, 2, 1);
 
-        Utente mockUtente1 = null;
-        Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
+        final Utente mockUtente1 = null;
+        final Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
 
         given(areaPersonaleService.getDatiPrivati(1)).willReturn(mockUtente1);
         given(areaPersonaleService.getDatiPrivati(2)).willReturn(mockUtente1);
 
-        Annuncio annuncio1 = new Annuncio(1l, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
-        Noleggio mockNoleggio = new Noleggio(1, Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, annuncio1);
+        final Annuncio annuncio1 = new Annuncio(1l, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
+        final Noleggio mockNoleggio = new Noleggio(1, Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, annuncio1);
 
         given(noleggioService.getNoleggio(1)).willReturn(mockNoleggio);
 
@@ -143,16 +143,16 @@ public class ValutazioneControllerTest {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testAggiungiValutazioneUtenteReturnServerErrorRegex() throws Exception{
 
-        ValutazioneDTO valutazioneUtenteDTO = new ValutazioneDTO(15, "", 1, 2, 1);
+        final ValutazioneDTO valutazioneUtenteDTO = new ValutazioneDTO(15, "", 1, 2, 1);
 
-        Utente mockUtente1 = new Utente(1, "user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
-        Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
+        final Utente mockUtente1 = new Utente(1, "user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
+        final Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
 
         given(areaPersonaleService.getDatiPrivati(1)).willReturn(mockUtente1);
         given(areaPersonaleService.getDatiPrivati(2)).willReturn(mockUtente1);
 
-        Annuncio annuncio1 = new Annuncio(1l, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
-        Noleggio mockNoleggio = new Noleggio(1, Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, annuncio1);
+        final Annuncio annuncio1 = new Annuncio(1l, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
+        final Noleggio mockNoleggio = new Noleggio(1, Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, annuncio1);
 
         given(noleggioService.getNoleggio(1)).willReturn(mockNoleggio);
 

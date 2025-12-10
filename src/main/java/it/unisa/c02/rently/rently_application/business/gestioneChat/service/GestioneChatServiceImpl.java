@@ -25,7 +25,7 @@ public class GestioneChatServiceImpl implements GestioneChatService {
      * {@inheritDoc}
      */
     @Override
-    public Messaggio addMessaggio(Messaggio messaggio) {
+    public Messaggio addMessaggio(final Messaggio messaggio) {
         return gestioneChatDAO.save(messaggio);
     }
 
@@ -33,7 +33,7 @@ public class GestioneChatServiceImpl implements GestioneChatService {
      * {@inheritDoc}
      */
     @Override
-    public List<Messaggio> getChat(Utente id1, Utente id2) {
+    public List<Messaggio> getChat(final Utente id1, final Utente id2) {
         return gestioneChatDAO.getChat(id1, id2);
     }
 }

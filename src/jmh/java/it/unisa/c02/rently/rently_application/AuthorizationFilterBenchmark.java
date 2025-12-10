@@ -51,61 +51,61 @@ public class AuthorizationFilterBenchmark {
         JwtProvider.prefix = "Bearer ";
 
         // Costruisci JSON utente come la claim "user"
-        Map<String, Object> userMap = new LinkedHashMap<>();
+        final Map<String, Object> userMap = new LinkedHashMap<>();
         userMap.put("id", 123L);
         userMap.put("email", randomEmail(emailLen));
         userMap.put("name", "Luca");
         userMap.put("roles", makeRoles(rolesCount));
 
-        String userJson;
+        final String userJson;
         try {
             userJson = mapper.writeValueAsString(userMap);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new IllegalStateException(e);
         }
 
         // Crea un token con claim "user" = JSON string
-        Map<String, Object> claims = new HashMap<>();
+        final Map<String, Object> claims = new HashMap<>();
         claims.put("user", userJson);
         token = JwtProvider.createJwt("subject", claims);
     }
 
     // Verifica solo la firma + decodifica
     @Benchmark
-    public void verify_only(Blackhole bh) {
-        DecodedJWT decoded = JwtProvider.verifyJwt(token);
+    public void verify_only(final Blackhole bh) {
+        final DecodedJWT decoded = JwtProvider.verifyJwt(token);
         bh.consume(decoded);
     }
 
     // Verifica + parsing in ObjectNode
     @Benchmark
-    public void verify_and_parse_user_claim(Blackhole bh) {
-        DecodedJWT decoded = JwtProvider.verifyJwt(token);
+    public void verify_and_parse_user_claim(final Blackhole bh) {
+        final DecodedJWT decoded = JwtProvider.verifyJwt(token);
         try {
-            ObjectNode userNode = new ObjectMapper()
+            final ObjectNode userNode = new ObjectMapper()
                     .readValue(decoded.getClaim("user").asString(), ObjectNode.class);
             bh.consume(userNode);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             bh.consume(e);
         }
     }
 
     // Verifica + parsing + conversione a UtenteDTO
     @Benchmark
-    public void verify_parse_convert_to_dto(Blackhole bh) {
-        DecodedJWT decoded = JwtProvider.verifyJwt(token);
+    public void verify_parse_convert_to_dto(final Blackhole bh) {
+        final DecodedJWT decoded = JwtProvider.verifyJwt(token);
         try {
-            ObjectNode userNode = mapper.readValue(decoded.getClaim("user").asString(), ObjectNode.class);
-            UtenteDTO user = mapper.convertValue(userNode, UtenteDTO.class);
+            final ObjectNode userNode = mapper.readValue(decoded.getClaim("user").asString(), ObjectNode.class);
+            final UtenteDTO user = mapper.convertValue(userNode, UtenteDTO.class);
             bh.consume(user);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             bh.consume(e);
         }
     }
 
     // ---- utils ----
-    private static String randomEmail(int len) {
-        StringBuilder sb = new StringBuilder(len + 12);
+    private static String randomEmail(final int len) {
+        final StringBuilder sb = new StringBuilder(len + 12);
         for (int i = 0; i < len; i++) {
             sb.append((char) ('a' + (i % 26)));
         }
@@ -113,8 +113,8 @@ public class AuthorizationFilterBenchmark {
         return sb.toString();
     }
 
-    private static List<String> makeRoles(int n) {
-        List<String> r = new ArrayList<>(n);
+    private static List<String> makeRoles(final int n) {
+        final List<String> r = new ArrayList<>(n);
         for (int i = 0; i < n; i++) r.add("ROLE_" + i);
         return r;
     }

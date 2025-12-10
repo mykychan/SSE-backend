@@ -45,16 +45,16 @@ public class GestioneNoleggioControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
     public void testGetRichiesteByNoleggiante() {
         try {
-            Utente mockUtente1 = new Utente(1, "user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
-            Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
-            Annuncio mockAnnuncio1 = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
+            final Utente mockUtente1 = new Utente(1, "user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
+            final Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
+            final Annuncio mockAnnuncio1 = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
 
             given(areaPersonaleService.getDatiPrivati(1)).willReturn(mockUtente1);
 
-            Noleggio mockNoleggio1 = new Noleggio(3, Noleggio.EnumStato.RICHIESTA, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, mockAnnuncio1);
-            Noleggio mockNoleggio2 = new Noleggio(2, Noleggio.EnumStato.CONCLUSO, new BigDecimal("200.00"), Date.valueOf("2024-02-10"), Date.valueOf("2024-02-15"), Date.valueOf("2024-02-07"), mockUtente1, mockUtente2, mockAnnuncio1);
+            final Noleggio mockNoleggio1 = new Noleggio(3, Noleggio.EnumStato.RICHIESTA, new BigDecimal("100.00"), Date.valueOf("2024-02-01"), Date.valueOf("2024-02-07"), Date.valueOf("2024-01-28"), mockUtente1, mockUtente2, mockAnnuncio1);
+            final Noleggio mockNoleggio2 = new Noleggio(2, Noleggio.EnumStato.CONCLUSO, new BigDecimal("200.00"), Date.valueOf("2024-02-10"), Date.valueOf("2024-02-15"), Date.valueOf("2024-02-07"), mockUtente1, mockUtente2, mockAnnuncio1);
 
-            List<Noleggio> list = new ArrayList<>();
+            final List<Noleggio> list = new ArrayList<>();
             list.add(mockNoleggio1);
             list.add(mockNoleggio2);
 
@@ -64,7 +64,7 @@ public class GestioneNoleggioControllerTests {
                             .param("idUtente", "1"))
                     .andExpect(status().is2xxSuccessful())
                     .andExpect(jsonPath("$[0].stato", is("RICHIESTA")));
-        }catch(Exception ex){
+        }catch(final Exception ex){
 
             ex.printStackTrace();
         }
@@ -74,9 +74,9 @@ public class GestioneNoleggioControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
     public void testGetRichiesteByNoleggianteReturnServerError() throws Exception {
 
-        Utente mockUtente1 = null;
-        Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
-        Annuncio mockAnnuncio1 = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
+        final Utente mockUtente1 = null;
+        final Utente mockUtente2 = new Utente(2, "user2", "Luca", "Bianchi", "luca.bianchi@email.com", "securePass", false);
+        final Annuncio mockAnnuncio1 = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
 
         given(areaPersonaleService.getDatiPrivati(1)).willReturn(mockUtente1);
 

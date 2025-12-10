@@ -23,7 +23,7 @@ public class JwtProvider {
     public static String headerParam;
 
     @Autowired
-    public JwtProvider(Environment env) {
+    public JwtProvider(final Environment env) {
         JwtProvider.secret = env.getProperty("security.secret");
         JwtProvider.prefix = env.getProperty("security.prefix");
         JwtProvider.headerParam = env.getProperty("security.param");
@@ -32,19 +32,19 @@ public class JwtProvider {
         }
     }
 
-    public static String createJwt(String subject, Map<String, Object> payloadClaims) {
-        JWTCreator.Builder builder = JWT.create().withSubject(subject).withIssuer(ISSUER);
+    public static String createJwt(final String subject, final Map<String, Object> payloadClaims) {
+        final JWTCreator.Builder builder = JWT.create().withSubject(subject).withIssuer(ISSUER);
         final DateTime now = DateTime.now();
         builder.withIssuedAt(now.toDate()).withExpiresAt(now.plusDays(1).toDate());
 
 
-        for (Map.Entry<String, Object> entry : payloadClaims.entrySet()) {
+        for (final Map.Entry<String, Object> entry : payloadClaims.entrySet()) {
             builder.withClaim(entry.getKey(), entry.getValue().toString());
         }
         return builder.sign(Algorithm.HMAC256(JwtProvider.secret));
     }
 
-    public static DecodedJWT verifyJwt(String jwt) {
+    public static DecodedJWT verifyJwt(final String jwt) {
         return JWT.require(Algorithm.HMAC256(JwtProvider.secret)).build().verify(jwt);
     }
 }

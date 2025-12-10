@@ -71,22 +71,22 @@ public class JwtProviderBenchmark {
 
         // Costruisci claims deterministici
         claims = new LinkedHashMap<>(claimCount * 2);
-        Random rnd = new Random(123);
+        final Random rnd = new Random(123);
         for (int i = 0; i < claimCount; i++) {
-            String key = "k" + i;
-            String value = randomAlpha(claimValueLen, rnd);
+            final String key = "k" + i;
+            final String value = randomAlpha(claimValueLen, rnd);
             claims.put(key, value);
         }
 
         // Prepara una lista di token da verificare
         tokensForVerify = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            Map<String, Object> c = (i % 2 == 0) ? claims : slightVariantClaims(claims, i, claimValueLen);
+            final Map<String, Object> c = (i % 2 == 0) ? claims : slightVariantClaims(claims, i, claimValueLen);
             // Se fixedSecret=false, cambiamo anche il secret per stressare il verify (non consigliato normalmente)
             if (!fixedSecret) {
                 JwtProvider.secret = "secret-" + i;
             }
-            String t = JwtProvider.createJwt(subject, c);
+            final String t = JwtProvider.createJwt(subject, c);
             tokensForVerify.add(t);
         }
 
@@ -106,16 +106,16 @@ public class JwtProviderBenchmark {
 
     /** Crea e firma un JWT a partire da subject e mappa claims. */
     @Benchmark
-    public void createJwt_buildAndSign(Blackhole bh) {
-        String token = JwtProvider.createJwt(subject, claims);
+    public void createJwt_buildAndSign(final Blackhole bh) {
+        final String token = JwtProvider.createJwt(subject, claims);
         bh.consume(token);
     }
 
     /** Crea e firma un JWT con claims leggermente variati (stressa la creazione) */
     @Benchmark
-    public void createJwt_withVariantClaims(Blackhole bh) {
-        Map<String, Object> variant = slightVariantClaims(claims, 1, claimValueLen);
-        String token = JwtProvider.createJwt(subject, variant);
+    public void createJwt_withVariantClaims(final Blackhole bh) {
+        final Map<String, Object> variant = slightVariantClaims(claims, 1, claimValueLen);
+        final String token = JwtProvider.createJwt(subject, variant);
         bh.consume(token);
     }
 
@@ -123,32 +123,32 @@ public class JwtProviderBenchmark {
 
     /** Verifica un token pre-generato (lista ciclica) */
     @Benchmark
-    public void verifyJwt_prebuiltTokens(Blackhole bh) {
-        String token = tokensForVerify.get((int) (System.nanoTime() % tokensForVerify.size()));
-        DecodedJWT jwt = JwtProvider.verifyJwt(token);
+    public void verifyJwt_prebuiltTokens(final Blackhole bh) {
+        final String token = tokensForVerify.get((int) (System.nanoTime() % tokensForVerify.size()));
+        final DecodedJWT jwt = JwtProvider.verifyJwt(token);
         bh.consume(jwt);
     }
 
     /** Verifica un token appena creato (include costo di creazione + verifica) */
     @Benchmark
-    public void createThenVerifyJwt(Blackhole bh) {
-        String token = JwtProvider.createJwt(subject, claims);
-        DecodedJWT jwt = JwtProvider.verifyJwt(token);
+    public void createThenVerifyJwt(final Blackhole bh) {
+        final String token = JwtProvider.createJwt(subject, claims);
+        final DecodedJWT jwt = JwtProvider.verifyJwt(token);
         bh.consume(jwt);
     }
 
     // ----------------- Utils -----------------
 
-    private static String randomAlpha(int len, Random rnd) {
-        char[] buf = new char[len];
+    private static String randomAlpha(final int len, final Random rnd) {
+        final char[] buf = new char[len];
         for (int i = 0; i < len; i++) {
             buf[i] = (char) ('a' + rnd.nextInt(26));
         }
         return new String(buf);
     }
 
-    private static Map<String, Object> slightVariantClaims(Map<String, Object> base, int seed, int valLen) {
-        Map<String, Object> out = new LinkedHashMap<>(base.size() * 2);
+    private static Map<String, Object> slightVariantClaims(final Map<String, Object> base, final int seed, final int valLen) {
+        final Map<String, Object> out = new LinkedHashMap<>(base.size() * 2);
         out.putAll(base);
         // Cambia/aggiunge un singolo claim per differenziare leggermente
         out.put("v" + seed, "x".repeat(Math.max(1, valLen)));

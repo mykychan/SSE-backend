@@ -28,7 +28,7 @@ public class ValutazioneOggetto {
      * @param valutatore Utente che ha effettuato la valutazione.
      * @param noleggio Noleggio associato all'annuncio.
      */
-    public ValutazioneOggetto(int voto, String descrizione, Annuncio annuncio, Utente valutatore, Noleggio noleggio) {
+    public ValutazioneOggetto(final int voto, final String descrizione, final Annuncio annuncio, final Utente valutatore, final Noleggio noleggio) {
         this.voto = voto;
         this.descrizione = descrizione;
         this.annuncio = annuncio;
@@ -45,7 +45,7 @@ public class ValutazioneOggetto {
      * @param valutatore Utente che ha effettuato la valutazione.
      * @param noleggio Noleggio associato all'annuncio.
      */
-    public ValutazioneOggetto(long id, int voto, String descrizione, Annuncio annuncio, Utente valutatore, Noleggio noleggio) {
+    public ValutazioneOggetto(final long id, final int voto, final String descrizione, final Annuncio annuncio, final Utente valutatore, final Noleggio noleggio) {
         this.id = id;
         this.voto = voto;
         this.descrizione = descrizione;

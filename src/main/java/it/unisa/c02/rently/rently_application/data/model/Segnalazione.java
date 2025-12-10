@@ -26,7 +26,7 @@ public class Segnalazione {
      * @param contenuto Contenuto della segnalazione.
      * @param segnalatore Utente che ha effettuato la segnalazione.
      */
-    public Segnalazione(EnumTipo tipo, String contenuto, Utente segnalatore) {
+    public Segnalazione(final EnumTipo tipo, final String contenuto, final Utente segnalatore) {
         this.tipo = tipo;
         this.contenuto = contenuto;
         this.segnalatore = segnalatore;

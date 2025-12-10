@@ -40,7 +40,7 @@ public class GestioneAreaPersonaleControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testModificaUtenteConPassword() throws Exception {
 
-        UtenteDTO utenteDTO = new UtenteDTO();
+        final UtenteDTO utenteDTO = new UtenteDTO();
         utenteDTO.setNome("Mario");
         utenteDTO.setCognome("Rossi");
         utenteDTO.setPassword("password123");
@@ -52,10 +52,10 @@ public class GestioneAreaPersonaleControllerTests {
         utenteDTO.setId(1);
 
 
-        Utente mockUtente1 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
+        final Utente mockUtente1 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
         given(areaPersonaleService.getDatiPrivati(anyLong())).willReturn(mockUtente1);
 
-        Utente mockUtente2 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", "passwordMario", false);
+        final Utente mockUtente2 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", "passwordMario", false);
 
         given(areaPersonaleService.updateUtente(any(Utente.class))).willReturn(mockUtente2);
 
@@ -72,7 +72,7 @@ public class GestioneAreaPersonaleControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testModificaUtenteSenzaPassword() throws Exception {
 
-        UtenteDTO utenteDTO = new UtenteDTO();
+        final UtenteDTO utenteDTO = new UtenteDTO();
         utenteDTO.setNome("Mario");
         utenteDTO.setCognome("Rossi");
         utenteDTO.setPassword("password123");
@@ -84,10 +84,10 @@ public class GestioneAreaPersonaleControllerTests {
         utenteDTO.setId(1);
 
 
-        Utente mockUtente1 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
+        final Utente mockUtente1 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
         given(areaPersonaleService.getDatiPrivati(anyLong())).willReturn(mockUtente1);
 
-        Utente mockUtente2 = new Utente(1,"MarioUsername", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
+        final Utente mockUtente2 = new Utente(1,"MarioUsername", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
 
         given(areaPersonaleService.updateUtente(any(Utente.class))).willReturn(mockUtente2);
 
@@ -103,7 +103,7 @@ public class GestioneAreaPersonaleControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testModificaUtenteReturnServerError() throws Exception {
 
-        UtenteDTO utenteDTO = new UtenteDTO();
+        final UtenteDTO utenteDTO = new UtenteDTO();
         utenteDTO.setNome("Mario");
         utenteDTO.setCognome("Rossi");
         utenteDTO.setPassword("password123");
@@ -115,7 +115,7 @@ public class GestioneAreaPersonaleControllerTests {
         utenteDTO.setId(1);
 
 
-        Utente mockUtente1 = null;
+        final Utente mockUtente1 = null;
         given(areaPersonaleService.getDatiPrivati(anyLong())).willReturn(mockUtente1);
 
         given(areaPersonaleService.updateUtente(any(Utente.class))).willReturn(null);
@@ -131,7 +131,7 @@ public class GestioneAreaPersonaleControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testModificaUtenteReturnServerErrorRegex() throws Exception {
 
-        UtenteDTO utenteDTO = new UtenteDTO();
+        final UtenteDTO utenteDTO = new UtenteDTO();
         utenteDTO.setNome("Mario");
         utenteDTO.setCognome("Rossi");
         utenteDTO.setPassword("password123");

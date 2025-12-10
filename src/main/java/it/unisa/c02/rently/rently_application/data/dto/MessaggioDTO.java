@@ -48,8 +48,8 @@ public class MessaggioDTO {
      * @param m messaggio da convertire in DTO
      * @return il DTO convertito dal messaggio
      */
-    public MessaggioDTO convertFromModel(Messaggio m) {
-        MessaggioDTO item = new MessaggioDTO();
+    public MessaggioDTO convertFromModel(final Messaggio m) {
+        final MessaggioDTO item = new MessaggioDTO();
         item.setDescrizione(m.getDescrizione());
         item.setId(m.getId());
         item.setOrarioInvio(String.valueOf(m.getOrarioInvio()));

@@ -17,12 +17,12 @@ public class ResponseServiceImpl implements ResponseService {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<String> Ok(Object data) {
+    public ResponseEntity<String> Ok(final Object data) {
         String json = "";
         try {
             json = new JsonHelper().getJsonFromObject(data);
         }
-        catch (Exception ex)
+        catch (final Exception ex)
         {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(json);
@@ -40,12 +40,12 @@ public class ResponseServiceImpl implements ResponseService {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<String> InternalError(Object data) {
+    public ResponseEntity<String> InternalError(final Object data) {
         String json = "";
         try {
             json = new JsonHelper().getJsonFromObject(data);
         }
-        catch (Exception ex)
+        catch (final Exception ex)
         {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(json);

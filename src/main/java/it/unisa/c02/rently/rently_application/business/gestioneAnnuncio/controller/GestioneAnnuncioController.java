@@ -102,7 +102,7 @@ public class GestioneAnnuncioController {
             item.setServerImage(annuncio, serverAddress);
             return responseService.Ok(item);
 
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return responseService.InternalError();
         }
     }
@@ -134,7 +134,7 @@ public class GestioneAnnuncioController {
             }
 
             return responseService.Ok(list);
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return responseService.InternalError();
         }
     }
@@ -199,7 +199,7 @@ public class GestioneAnnuncioController {
             final AnnuncioDTO annuncioDto = new AnnuncioDTO().convertFromModel(newItem);
             return responseService.Ok(annuncioDto);
 
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return responseService.InternalError();
         }
     }
@@ -255,7 +255,7 @@ public class GestioneAnnuncioController {
             final AnnuncioDTO annuncioDto = new AnnuncioDTO().convertFromModel(newItem);
             return responseService.Ok(annuncioDto);
 
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return responseService.InternalError();
         }
     }
@@ -271,7 +271,7 @@ public class GestioneAnnuncioController {
         try {
             gestioneAnnuncioService.deleteAnnuncio(id);
             return responseService.Ok();
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return responseService.InternalError();
         }
     }

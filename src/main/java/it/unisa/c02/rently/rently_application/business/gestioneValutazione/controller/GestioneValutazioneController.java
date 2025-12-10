@@ -73,21 +73,21 @@ public class GestioneValutazioneController {
      * @return ResponseEntity contenente l'esito dell'operazione.
      */
     @PostMapping("/aggiungi-valutazione-utente")
-    public ResponseEntity<String> aggiungiValutazioneUtente(@RequestBody ValutazioneDTO valutazioneDTO) {
+    public ResponseEntity<String> aggiungiValutazioneUtente(@RequestBody final ValutazioneDTO valutazioneDTO) {
 
-        ResponseDTO message = new ResponseDTO();
+        final ResponseDTO message = new ResponseDTO();
         message.message = "Errore durante l'inserimento dei dati";
 
-        HashMap<String, String> tester = new HashMap<>();
+        final HashMap<String, String> tester = new HashMap<>();
         tester.put(valutazioneDTO.getDescrizione(), "^[\\sa-zA-Z0-9.,:;'-?!èéòàùì]{1,255}$");
 
-        RegexTester regexTester = new RegexTester();
+        final RegexTester regexTester = new RegexTester();
         if (!regexTester.toTest(tester)) {
             return responseService.InternalError(message);
         }
 
         ValutazioneUtente valutazione = new ValutazioneUtente();
-        Utente utente = areaPersonaleService.getDatiPrivati(valutazioneDTO.getValutatore());
+        final Utente utente = areaPersonaleService.getDatiPrivati(valutazioneDTO.getValutatore());
         valutazione.setValutatore(utente);
         valutazione.setDescrizione(valutazioneDTO.getDescrizione());
         valutazione.setValutato(areaPersonaleService.getDatiPrivati(valutazioneDTO.getValutato()));
@@ -100,7 +100,7 @@ public class GestioneValutazioneController {
 
         if(valutazione.getValutato()!= null && valutazione.getValutatore()!= null && valutazione.getNoleggio() != null){
             valutazione = valutazioneService.addValutazioneUtente(valutazione);
-            ValutazioneDTO item = new ValutazioneDTO().convertFromValutazioneUtente(valutazione);
+            final ValutazioneDTO item = new ValutazioneDTO().convertFromValutazioneUtente(valutazione);
             return responseService.Ok(item);
         }
         else
@@ -114,14 +114,14 @@ public class GestioneValutazioneController {
      * @return ResponseEntity contenente la lista delle valutazioni dell'utente nel formato JSON.
      */
     @GetMapping("/visualizza-valutazioni-utente")
-    public ResponseEntity<String> visualizzaValutazioniUtente(@RequestParam long valutato){
+    public ResponseEntity<String> visualizzaValutazioniUtente(@RequestParam final long valutato){
 
-        Utente utente = areaPersonaleService.getDatiPrivati(valutato);
+        final Utente utente = areaPersonaleService.getDatiPrivati(valutato);
         if(utente!= null){
-            List<ValutazioneUtente> valutazioni = valutazioneService.findAllByUtente(utente);
-            List<ValutazioneDTO> list = new ArrayList<>();
-            for (ValutazioneUtente vu: valutazioni) {
-                ValutazioneDTO item = new ValutazioneDTO().convertFromValutazioneUtente(vu);
+            final List<ValutazioneUtente> valutazioni = valutazioneService.findAllByUtente(utente);
+            final List<ValutazioneDTO> list = new ArrayList<>();
+            for (final ValutazioneUtente vu: valutazioni) {
+                final ValutazioneDTO item = new ValutazioneDTO().convertFromValutazioneUtente(vu);
                 list.add(item);
             }
             return responseService.Ok(list);
@@ -137,11 +137,11 @@ public class GestioneValutazioneController {
      * @return ResponseEntity contenente la media delle valutazioni dell'utente nel formato JSON.
      */
     @GetMapping("/visualizza-media-valutazioni-utente")
-    public ResponseEntity<String> visualizzaMediaValutazioniUtente(@RequestParam long valutato){
+    public ResponseEntity<String> visualizzaMediaValutazioniUtente(@RequestParam final long valutato){
 
-        Utente utente = areaPersonaleService.getDatiPrivati(valutato);
+        final Utente utente = areaPersonaleService.getDatiPrivati(valutato);
         if(utente!= null){
-            double media = valutazioneService.mediaValutazioniUtenteByUtente(utente);
+            final double media = valutazioneService.mediaValutazioniUtenteByUtente(utente);
             return responseService.Ok(media);
         }
         else
@@ -155,21 +155,21 @@ public class GestioneValutazioneController {
      * @return ResponseEntity contenente l'esito dell'operazione.
      */
     @PostMapping("/aggiungi-valutazione-oggetto")
-    public ResponseEntity<String> aggiungiValutazioneOggetto(@RequestBody ValutazioneDTO valutazioneDTO) {
+    public ResponseEntity<String> aggiungiValutazioneOggetto(@RequestBody final ValutazioneDTO valutazioneDTO) {
 
-        ResponseDTO message = new ResponseDTO();
+        final ResponseDTO message = new ResponseDTO();
         message.message = "Errore durante l'inserimento dei dati";
 
-        HashMap<String, String> tester = new HashMap<>();
+        final HashMap<String, String> tester = new HashMap<>();
         tester.put(valutazioneDTO.getDescrizione(), "^[\\sa-zA-Z0-9.,:;'-?!]{1,255}$");
 
-        RegexTester regexTester = new RegexTester();
+        final RegexTester regexTester = new RegexTester();
         if (!regexTester.toTest(tester)) {
             return responseService.InternalError(message);
         }
 
         ValutazioneOggetto valutazione = new ValutazioneOggetto();
-        Utente utente = areaPersonaleService.getDatiPrivati(valutazioneDTO.getValutatore());
+        final Utente utente = areaPersonaleService.getDatiPrivati(valutazioneDTO.getValutatore());
         valutazione.setValutatore(utente);
         valutazione.setDescrizione(valutazioneDTO.getDescrizione());
         valutazione.setAnnuncio(annuncioService.getAnnuncio(valutazioneDTO.getValutato()).orElse(null));
@@ -195,17 +195,17 @@ public class GestioneValutazioneController {
      * @return ResponseEntity contenente la lista delle valutazioni dell'annuncio nel formato JSON.
      */
     @GetMapping("/visualizza-valutazioni-annuncio")
-    public ResponseEntity<String> visualizzaValutazioniAnnuncio(@RequestParam long id){
+    public ResponseEntity<String> visualizzaValutazioniAnnuncio(@RequestParam final long id){
 
-        Annuncio annuncio = annuncioService.getAnnuncio(id).orElse(null);
+        final Annuncio annuncio = annuncioService.getAnnuncio(id).orElse(null);
 
         List<ValutazioneDTO> list = new ArrayList<>();
 
         if(annuncio!= null){
-            List<ValutazioneOggetto> valutazioni = valutazioneService.findAllByAnnuncio(annuncio);
+            final List<ValutazioneOggetto> valutazioni = valutazioneService.findAllByAnnuncio(annuncio);
             list = new ArrayList<>();
-            for (ValutazioneOggetto vo: valutazioni) {
-                ValutazioneDTO item = new ValutazioneDTO().convertFromValutazioneOggetto(vo);
+            for (final ValutazioneOggetto vo: valutazioni) {
+                final ValutazioneDTO item = new ValutazioneDTO().convertFromValutazioneOggetto(vo);
                 list.add(item);
             }
         }
@@ -219,11 +219,11 @@ public class GestioneValutazioneController {
      * @return ResponseEntity contenente la media delle valutazioni dell'annuncio nel formato JSON.
      */
     @GetMapping("/visualizza-media-valutazioni-annuncio")
-    public ResponseEntity<String> visualizzaMediaValutazioniOggetto(@RequestParam long id){
+    public ResponseEntity<String> visualizzaMediaValutazioniOggetto(@RequestParam final long id){
 
-        Annuncio annuncio = annuncioService.getAnnuncio(id).orElse(null);
+        final Annuncio annuncio = annuncioService.getAnnuncio(id).orElse(null);
         if(annuncio!= null){
-            double media = valutazioneService.mediaValutazioniOggettoByAnnuncio(annuncio);
+            final double media = valutazioneService.mediaValutazioniOggettoByAnnuncio(annuncio);
             return responseService.Ok(media);
         }
         else

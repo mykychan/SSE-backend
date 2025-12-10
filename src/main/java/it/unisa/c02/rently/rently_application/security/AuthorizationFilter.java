@@ -26,14 +26,14 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     private final GestioneAutenticazioneDAO userRepository;
     private final ObjectMapper mapper;
 
-    public AuthorizationFilter(AuthenticationManager authenticationManager, GestioneAutenticazioneDAO userRepository) {
+    public AuthorizationFilter(final AuthenticationManager authenticationManager, final GestioneAutenticazioneDAO userRepository) {
         super(authenticationManager);
         this.userRepository = userRepository;
         this.mapper = new ObjectMapper();
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain) throws IOException, ServletException {
 
         final String header = request.getHeader(JwtProvider.headerParam);
         if (header != null) {
@@ -42,7 +42,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             final UtenteDTO user = this.mapper.convertValue(userNode, UtenteDTO.class);
             this.userRepository.findById(user.getId()).ifPresent(entity -> {
 
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         user.getEmail(), new ArrayList<>(), new ArrayList<>()
                 );
 

@@ -25,7 +25,7 @@ public class GestioneRicercaServiceImpl implements GestioneRicercaService {
      * {@inheritDoc}
      */
     @Override
-    public List<Annuncio> searchByCategoria(String categoria) {
+    public List<Annuncio> searchByCategoria(final String categoria) {
         return annuncioDAO.findByCategoria(categoria);
     }
 
@@ -33,7 +33,7 @@ public class GestioneRicercaServiceImpl implements GestioneRicercaService {
      * {@inheritDoc}
      */
     @Override
-    public List<Annuncio> searchByCondizione(String condizione) {
+    public List<Annuncio> searchByCondizione(final String condizione) {
         return annuncioDAO.findByCondizione(condizione);
     }
 
@@ -41,7 +41,7 @@ public class GestioneRicercaServiceImpl implements GestioneRicercaService {
      * {@inheritDoc}
      */
     @Override
-    public List<Annuncio> searchByData(Date inizio, Date fine) {
+    public List<Annuncio> searchByData(final Date inizio, final Date fine) {
         return annuncioDAO.findByDataFineBetween(inizio, fine);
     }
 
@@ -49,7 +49,7 @@ public class GestioneRicercaServiceImpl implements GestioneRicercaService {
      * {@inheritDoc}
      */
     @Override
-    public List<Annuncio> searchByDescrizione(String descrizione) {
+    public List<Annuncio> searchByDescrizione(final String descrizione) {
         return annuncioDAO.findByDescrizioneContains(descrizione);
     }
 

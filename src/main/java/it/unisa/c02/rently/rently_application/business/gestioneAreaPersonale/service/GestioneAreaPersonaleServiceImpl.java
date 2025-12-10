@@ -25,7 +25,7 @@ public class GestioneAreaPersonaleServiceImpl implements GestioneAreaPersonaleSe
      * {@inheritDoc}
      */
     @Override
-    public Utente updateUtente(Utente utente) {
+    public Utente updateUtente(final Utente utente) {
         return gestioneAreaPersonaleDAO.save(utente);
     }
 
@@ -33,8 +33,8 @@ public class GestioneAreaPersonaleServiceImpl implements GestioneAreaPersonaleSe
      * {@inheritDoc}
      */
     @Override
-    public Utente getDatiPrivati(long id) {
-        Optional<Utente> optional = gestioneAreaPersonaleDAO.findById(id);
+    public Utente getDatiPrivati(final long id) {
+        final Optional<Utente> optional = gestioneAreaPersonaleDAO.findById(id);
         if(optional.isPresent()) {
             return optional.get();
         }
@@ -46,8 +46,8 @@ public class GestioneAreaPersonaleServiceImpl implements GestioneAreaPersonaleSe
      * {@inheritDoc}
      */
     @Override
-    public Utente findByUsername(Utente utente) {
-        Optional<Utente> optional = gestioneAreaPersonaleDAO.findByUsername(utente.getUsername());
+    public Utente findByUsername(final Utente utente) {
+        final Optional<Utente> optional = gestioneAreaPersonaleDAO.findByUsername(utente.getUsername());
         if(optional.isPresent()) {
             return optional.get();
         }

@@ -34,7 +34,7 @@ public class GestioneAnnuncioServiceImpl implements GestioneAnnuncioService {
      * {@inheritDoc}
      */
     @Override
-    public Annuncio updateAnnuncio(Annuncio annuncio) {
+    public Annuncio updateAnnuncio(final Annuncio annuncio) {
         return gestioneAnnuncioDAO.save(annuncio);
     }
 
@@ -51,7 +51,7 @@ public class GestioneAnnuncioServiceImpl implements GestioneAnnuncioService {
      */
     @Override
     public boolean deleteAnnuncio(final Long id) {
-        var item = gestioneAnnuncioDAO.findById(id);
+        final var item = gestioneAnnuncioDAO.findById(id);
         if(item.isEmpty()) {
             return false;
         }
@@ -64,7 +64,7 @@ public class GestioneAnnuncioServiceImpl implements GestioneAnnuncioService {
      * {@inheritDoc}
      */
     @Override
-    public List<Annuncio> findAllByUtente(Utente utente) {
+    public List<Annuncio> findAllByUtente(final Utente utente) {
         return gestioneAnnuncioDAO.findByUtente(utente);
     }
 }

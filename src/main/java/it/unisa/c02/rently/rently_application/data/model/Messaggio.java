@@ -29,7 +29,7 @@ public class Messaggio {
      * @param mittente Utente mittente del messaggio.
      * @param destinatario Utente destinatario del messaggio.
      */
-    public Messaggio(String descrizione, Timestamp orarioInvio, Utente mittente, Utente destinatario) {
+    public Messaggio(final String descrizione, final Timestamp orarioInvio, final Utente mittente, final Utente destinatario) {
         this.descrizione = descrizione;
         this.orarioInvio = orarioInvio;
         this.mittente = mittente;

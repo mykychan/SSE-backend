@@ -27,7 +27,7 @@ public class GestioneAvvisiServiceImpl implements GestioneAvvisiService {
      * {@inheritDoc}
      */
     @Override
-    public Segnalazione addSegnalazione(Segnalazione segnalazione) {
+    public Segnalazione addSegnalazione(final Segnalazione segnalazione) {
         return segnalazioneDAO.save(segnalazione);
     }
 
@@ -36,7 +36,7 @@ public class GestioneAvvisiServiceImpl implements GestioneAvvisiService {
      * {@inheritDoc}
      */
     @Override
-    public void removeSegnalazione(Segnalazione segnalazione) {
+    public void removeSegnalazione(final Segnalazione segnalazione) {
         segnalazioneDAO.deleteById(segnalazione.getId());
     }
 
@@ -45,8 +45,8 @@ public class GestioneAvvisiServiceImpl implements GestioneAvvisiService {
      * {@inheritDoc}
      */
     @Override
-    public Segnalazione getSegnalazione(long id) {
-        Optional<Segnalazione> optional = segnalazioneDAO.findById(id);
+    public Segnalazione getSegnalazione(final long id) {
+        final Optional<Segnalazione> optional = segnalazioneDAO.findById(id);
         if(optional.isPresent()) {
             return optional.get();
         }

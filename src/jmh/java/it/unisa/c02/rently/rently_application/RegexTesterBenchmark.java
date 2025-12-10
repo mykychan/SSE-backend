@@ -69,14 +69,14 @@ public class RegexTesterBenchmark {
         for (int i = 0; i < mapSize; i++) {
             String s = randomLowercase(rnd, strLen);
 
-            String regex = switch (patternType) {
+            final String regex = switch (patternType) {
                 case "literal" -> s;                     // il pattern è letterale uguale alla stringa
                 case "charclass" -> "[a-z]{" + strLen + "}"; // matcha esattamente strLen minuscole
                 case "prefix" -> s.substring(0, Math.max(1, strLen / 4)) + ".*"; // prefisso + wildcard
                 default -> s;
             };
 
-            boolean shouldMatch;
+            final boolean shouldMatch;
             if (matchesSoFar < matchesTarget) {
                 // cerchiamo di creare una coppia che matcha
                 shouldMatch = true;
@@ -93,8 +93,8 @@ public class RegexTesterBenchmark {
                     s = s.substring(0, s.length() - 1) + "_";
                 } else if (patternType.equals("prefix")) {
                     // cambia il primo carattere del prefisso
-                    char first = s.charAt(0);
-                    char different = (first == 'a') ? 'z' : 'a';
+                    final char first = s.charAt(0);
+                    final char different = (first == 'a') ? 'z' : 'a';
                     s = different + s.substring(1);
                 }
             } else {
@@ -104,7 +104,7 @@ public class RegexTesterBenchmark {
             map.put(s, regex);
 
             // Precompilazione per le varianti ottimizzate
-            Pattern p = Pattern.compile(regex);
+            final Pattern p = Pattern.compile(regex);
             compiled.put(s, p);
 
             // Pre-costruzione di Matcher (non usato in tutti i test, ma utile in una variante)
@@ -116,17 +116,17 @@ public class RegexTesterBenchmark {
 
     /** Baseline: la tua implementazione attuale (stream + String.matches) */
     @Benchmark
-    public void baseline_stream_matches(Blackhole bh) {
-        boolean out = underTest.toTest(map);
+    public void baseline_stream_matches(final Blackhole bh) {
+        final boolean out = underTest.toTest(map);
         bh.consume(out);
     }
 
     /** Variante equivalente senza stream/lambda: for loop + String.matches. */
     @Benchmark
-    public void forloop_matches_compileEveryCall(Blackhole bh) {
+    public void forloop_matches_compileEveryCall(final Blackhole bh) {
         boolean all = true;
-        for (Map.Entry<String, String> e : map.entrySet()) {
-            String s = e.getKey();
+        for (final Map.Entry<String, String> e : map.entrySet()) {
+            final String s = e.getKey();
             if (s == null) continue;
             if (!s.matches(e.getValue())) {
                 all = false;
@@ -138,10 +138,10 @@ public class RegexTesterBenchmark {
 
     /** Variante con precompilazione Pattern: for loop + Pattern.matcher(s).matches(). */
     @Benchmark
-    public void forloop_precompiledPattern(Blackhole bh) {
+    public void forloop_precompiledPattern(final Blackhole bh) {
         boolean all = true;
-        for (Map.Entry<String, Pattern> e : compiled.entrySet()) {
-            String s = e.getKey();
+        for (final Map.Entry<String, Pattern> e : compiled.entrySet()) {
+            final String s = e.getKey();
             if (s == null) continue;
             if (!e.getValue().matcher(s).matches()) {
                 all = false;
@@ -153,9 +153,9 @@ public class RegexTesterBenchmark {
 
     /** Variante con stream ma usando Pattern precompilati. */
     @Benchmark
-    public void stream_precompiledPattern(Blackhole bh) {
-        boolean out = compiled.entrySet().stream().allMatch(e -> {
-            String s = e.getKey();
+    public void stream_precompiledPattern(final Blackhole bh) {
+        final boolean out = compiled.entrySet().stream().allMatch(e -> {
+            final String s = e.getKey();
             if (s == null) return true;
             return e.getValue().matcher(s).matches();
         });
@@ -164,13 +164,13 @@ public class RegexTesterBenchmark {
 
     /** Variante che riusa Matcher pre-costruiti (quando possibile). */
     @Benchmark
-    public void forloop_reuseMatcher(Blackhole bh) {
+    public void forloop_reuseMatcher(final Blackhole bh) {
         boolean all = true;
         int i = 0;
-        for (Map.Entry<String, Pattern> e : compiled.entrySet()) {
-            String s = e.getKey();
+        for (final Map.Entry<String, Pattern> e : compiled.entrySet()) {
+            final String s = e.getKey();
             if (s == null) continue;
-            Matcher m = prebuiltMatchers.get(i++);
+            final Matcher m = prebuiltMatchers.get(i++);
             // il Matcher è costruito sul (pattern, stringa) corretti in setup()
             if (!m.matches()) {
                 all = false;
@@ -182,18 +182,18 @@ public class RegexTesterBenchmark {
 
     // ----------------- Utils -----------------
 
-    private static String randomLowercase(Random rnd, int len) {
-        char[] buf = new char[len];
+    private static String randomLowercase(final Random rnd, final int len) {
+        final char[] buf = new char[len];
         for (int i = 0; i < len; i++) {
             buf[i] = (char) ('a' + rnd.nextInt(26));
         }
         return new String(buf);
     }
 
-    private static String mutateString(String s) {
+    private static String mutateString(final String s) {
         if (s.isEmpty()) return s;
-        char first = s.charAt(0);
-        char different = (first == 'a') ? 'z' : 'a';
+        final char first = s.charAt(0);
+        final char different = (first == 'a') ? 'z' : 'a';
         return different + s.substring(1);
     }
 }

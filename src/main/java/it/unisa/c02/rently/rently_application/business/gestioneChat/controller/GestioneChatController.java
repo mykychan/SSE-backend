@@ -65,22 +65,22 @@ public class GestioneChatController {
          */
 
         @PostMapping("/aggiungi-messaggio")
-        public ResponseEntity<String> aggiungiMessaggio(@RequestBody MessaggioDTO messaggioDTO) {
+        public ResponseEntity<String> aggiungiMessaggio(@RequestBody final MessaggioDTO messaggioDTO) {
 
-                ResponseDTO message = new ResponseDTO();
+                final ResponseDTO message = new ResponseDTO();
                 message.message = "Il contenuto del messaggio è sbagliato";
 
-                HashMap<String, String> tester = new HashMap<>();
+                final HashMap<String, String> tester = new HashMap<>();
                 tester.put(messaggioDTO.getDescrizione(), "^[\\W\\sa-zA-Z0-9.,:;'-_èéòàìù]{1,2000}$");
 
-                RegexTester regexTester = new RegexTester();
+                final RegexTester regexTester = new RegexTester();
                 if (!regexTester.toTest(tester)) {
                         return responseService.InternalError(message);
                 }
 
                 Messaggio messaggio = new Messaggio();
-                Utente mittente = areaPersonaleService.getDatiPrivati(messaggioDTO.getMittente());
-                Utente destinatario = areaPersonaleService.getDatiPrivati(messaggioDTO.getDestinatario());
+                final Utente mittente = areaPersonaleService.getDatiPrivati(messaggioDTO.getMittente());
+                final Utente destinatario = areaPersonaleService.getDatiPrivati(messaggioDTO.getDestinatario());
 
                 messaggio.setDestinatario(destinatario);
                 messaggio.setMittente(mittente);
@@ -89,7 +89,7 @@ public class GestioneChatController {
 
                 if(messaggio.getDestinatario()!= null && messaggio.getMittente()!= null){
                         messaggio = chatService.addMessaggio(messaggio);
-                        MessaggioDTO messaggioItem = new MessaggioDTO().convertFromModel(messaggio);
+                        final MessaggioDTO messaggioItem = new MessaggioDTO().convertFromModel(messaggio);
 
                         return responseService.Ok(messaggioItem);
                 }
@@ -104,16 +104,16 @@ public class GestioneChatController {
          * @return ResponseEntity contenente l'esito dell'operazione.
          */
         @PostMapping("/visualizza-chat")
-        public ResponseEntity<String> getChat (@RequestBody MessaggioDTO messaggioDTO){
+        public ResponseEntity<String> getChat (@RequestBody final MessaggioDTO messaggioDTO){
 
-                Utente dest = areaPersonaleService.getDatiPrivati(messaggioDTO.getDestinatario());
-                Utente mitt = areaPersonaleService.getDatiPrivati(messaggioDTO.getMittente());
+                final Utente dest = areaPersonaleService.getDatiPrivati(messaggioDTO.getDestinatario());
+                final Utente mitt = areaPersonaleService.getDatiPrivati(messaggioDTO.getMittente());
 
-                List<Messaggio> chat = chatService.getChat(dest, mitt);
+                final List<Messaggio> chat = chatService.getChat(dest, mitt);
                 if(chat != null) {
-                        List<MessaggioDTO> list = new ArrayList<>();
-                        for (Messaggio m : chat) {
-                                MessaggioDTO item = new MessaggioDTO().convertFromModel(m);
+                        final List<MessaggioDTO> list = new ArrayList<>();
+                        for (final Messaggio m : chat) {
+                                final MessaggioDTO item = new MessaggioDTO().convertFromModel(m);
                                 list.add(item);
                         }
                         return responseService.Ok(list);

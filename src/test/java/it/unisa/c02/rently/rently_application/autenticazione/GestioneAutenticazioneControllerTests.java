@@ -39,7 +39,7 @@ public class GestioneAutenticazioneControllerTests {
     @Test
      void testSignUp() throws Exception {
 
-        UtenteDTO utenteDTO = new UtenteDTO();
+        final UtenteDTO utenteDTO = new UtenteDTO();
         utenteDTO.setUsername("user1");
         utenteDTO.setNome("Mario");
         utenteDTO.setCognome("Rossi");
@@ -47,7 +47,7 @@ public class GestioneAutenticazioneControllerTests {
         utenteDTO.setEmail("mario.rossi@email.com");
         utenteDTO.setPremium(false);
 
-        Utente mockUtente = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
+        final Utente mockUtente = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", "password123", false);
         doNothing().when(autenticazioneService).signUp(any(Utente.class));
 
         mockMvc.perform(post("/api/autenticazione/signup")
@@ -60,7 +60,7 @@ public class GestioneAutenticazioneControllerTests {
     @Test
      void testSignUpReturnServerError() throws Exception {
 
-        UtenteDTO utenteDTO = new UtenteDTO();
+        final UtenteDTO utenteDTO = new UtenteDTO();
         utenteDTO.setUsername("user1");
         utenteDTO.setNome("Mario");
         utenteDTO.setCognome("Rossi");
@@ -80,7 +80,7 @@ public class GestioneAutenticazioneControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testModificaUtenteReturnServerErrorRegex() throws Exception {
 
-        UtenteDTO utenteDTO = new UtenteDTO();
+        final UtenteDTO utenteDTO = new UtenteDTO();
         utenteDTO.setUsername("user1");
         utenteDTO.setNome("Mario");
         utenteDTO.setCognome("Rossi");

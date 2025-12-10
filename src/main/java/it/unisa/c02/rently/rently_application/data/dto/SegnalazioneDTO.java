@@ -23,7 +23,7 @@ public class SegnalazioneDTO {
      * @param contenuto Contenuto della segnalazione.
      * @param segnalatore Utente che ha effettuato la segnalazione.
      */
-    public SegnalazioneDTO(String tipo, String contenuto, long segnalatore) {
+    public SegnalazioneDTO(final String tipo, final String contenuto, final long segnalatore) {
         this.tipo = tipo;
         this.contenuto = contenuto;
         this.segnalatore = segnalatore;

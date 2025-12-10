@@ -88,7 +88,7 @@ public class AnnuncioDTO implements Serializable {
      * @param dataFine Data di fine disponibilità dell'oggetto dell'annuncio.
      * @param idUtente Utente che ha pubblicato l'annuncio.
      */
-    public AnnuncioDTO(long id, String nome, String strada, String citta, String cap, String descrizione, BigDecimal prezzo, String immagine, String categoria, String condizione, String dataFine, Long idUtente) {
+    public AnnuncioDTO(final long id, final String nome, final String strada, final String citta, final String cap, final String descrizione, final BigDecimal prezzo, final String immagine, final String categoria, final String condizione, final String dataFine, final Long idUtente) {
         this.id = id;
         this.nome = nome;
         this.strada = strada;
@@ -114,8 +114,8 @@ public class AnnuncioDTO implements Serializable {
      * @param a Annuncio da convertire in DTO
      * @return il DTO convertito dall'annuncio
      */
-    public AnnuncioDTO convertFromModel(Annuncio a) {
-        AnnuncioDTO item = new AnnuncioDTO();
+    public AnnuncioDTO convertFromModel(final Annuncio a) {
+        final AnnuncioDTO item = new AnnuncioDTO();
         item.setId(a.getId());
         item.setNome(a.getNome());
         item.setStrada(a.getStrada());
@@ -138,9 +138,9 @@ public class AnnuncioDTO implements Serializable {
      * @param a Annuncio a cui appartiene l'immagine
      * @param serverPath il path assoluto del server
      */
-    public void setServerImage(Annuncio a, String serverPath) {
+    public void setServerImage(final Annuncio a, final String serverPath) {
         //Path path = Paths.get(serverPath, "annunci", String.valueOf(a.getId()), a.getImmagine());
-        String path = String.format("%s/%s/%s/%s", serverPath, "annunci", String.valueOf(a.getId()), a.getImmagine());
+        final String path = String.format("%s/%s/%s/%s", serverPath, "annunci", String.valueOf(a.getId()), a.getImmagine());
         this.setImmagine(path);
     }
 }

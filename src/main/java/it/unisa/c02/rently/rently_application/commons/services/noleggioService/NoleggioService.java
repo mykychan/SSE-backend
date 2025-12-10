@@ -32,14 +32,14 @@ public class NoleggioService {
     @Scheduled(fixedDelay = 30000)
     public void updateFineNoleggio() throws InterruptedException {
         try {
-            java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-            List<Noleggio> list = noleggioService.checkFineNoleggio(date);
+            final java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            final List<Noleggio> list = noleggioService.checkFineNoleggio(date);
 
-            for(Noleggio item:list) {
+            for(final Noleggio item:list) {
                 item.setStato(Noleggio.EnumStato.FINE);
                 noleggioService.updateStatoNoleggio(item);
             }
-        } catch (Exception ex)
+        } catch (final Exception ex)
         {
             ex.printStackTrace();
         }
@@ -53,15 +53,15 @@ public class NoleggioService {
     public void checkRichiestaNoleggio() throws InterruptedException {
         try {
 
-            List<Noleggio> list = noleggioService.findRichieste();
-            java.sql.Date today = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            final List<Noleggio> list = noleggioService.findRichieste();
+            final java.sql.Date today = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
-            for(Noleggio item:list) {
+            for(final Noleggio item:list) {
 
-                Calendar cal = Calendar.getInstance();
+                final Calendar cal = Calendar.getInstance();
                 cal.setTime(item.getDataRichiesta());
                 cal.add(Calendar.DATE, 7);
-                java.sql.Date dataRichiestaModifica = new java.sql.Date(cal.getTime().getTime());
+                final java.sql.Date dataRichiestaModifica = new java.sql.Date(cal.getTime().getTime());
 
                 if(dataRichiestaModifica.toString().equals(today.toString())){
 
@@ -69,7 +69,7 @@ public class NoleggioService {
 
                 }
             }
-        } catch (Exception ex)
+        } catch (final Exception ex)
         {
             ex.printStackTrace();
         }

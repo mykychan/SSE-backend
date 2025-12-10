@@ -79,8 +79,8 @@ public class NoleggioDTO {
      * @param n Noleggio da convertire in DTO
      * @return il DTO convertito dal Noleggio
      */
-    public NoleggioDTO convertFromModel(Noleggio n) {
-        NoleggioDTO item = new NoleggioDTO();
+    public NoleggioDTO convertFromModel(final Noleggio n) {
+        final NoleggioDTO item = new NoleggioDTO();
         item.setId(n.getId());
         item.setStato(String.valueOf(n.getStato()));
         item.setPrezzoTotale(n.getPrezzoTotale());

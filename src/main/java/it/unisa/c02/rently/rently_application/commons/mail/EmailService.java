@@ -26,9 +26,9 @@ public class EmailService {
      * @param to il destinatario della mail.
      *           
      */
-    public void sendEmail(String to, String subject, String text) {
+    public void sendEmail(final String to, final String subject, final String text) {
 
-        SimpleMailMessage message = new SimpleMailMessage();
+        final SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);

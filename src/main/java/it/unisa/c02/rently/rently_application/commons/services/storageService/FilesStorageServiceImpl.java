@@ -21,10 +21,10 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     private Path root;
 
     @Override
-    public void init(String basePath) {
+    public void init(final String basePath) {
         try {
 
-            Path targetDirectory = Paths.get(basePath).toAbsolutePath().normalize();
+            final Path targetDirectory = Paths.get(basePath).toAbsolutePath().normalize();
 
             // Assicurati che la directory di destinazione esista
             if (!targetDirectory.toFile().exists()) {
@@ -35,32 +35,32 @@ public class FilesStorageServiceImpl implements FilesStorageService {
            
             root = targetDirectory;
             Files.createDirectories(root);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException("Could not initialize folder for upload!");
         }
     }
 
     @Override
-    public void save(MultipartFile file, String fileName) {
+    public void save(final MultipartFile file, final String fileName) {
         try {
             Files.copy(file.getInputStream(), this.root.resolve(fileName));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
     }
 
     @Override
-    public Resource load(String filename) {
+    public Resource load(final String filename) {
         try {
-            Path file = root.resolve(filename);
-            Resource resource = new UrlResource(file.toUri());
+            final Path file = root.resolve(filename);
+            final Resource resource = new UrlResource(file.toUri());
 
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {
                 throw new RuntimeException("Could not read the file!");
             }
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
@@ -74,22 +74,22 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     public Stream<Path> loadAll() {
         try {
             return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException("Could not load the files!");
         }
     }
 
     @Override
     public String generateRandomFileName() {
-        int n = 12;
-        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        final int n = 12;
+        final String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"
                 + "abcdefghijklmnopqrstuvxyz";
 
-        StringBuilder sb = new StringBuilder(n);
+        final StringBuilder sb = new StringBuilder(n);
 
         for (int i = 0; i < n; i++) {
-            int index
+            final int index
                     = (int) (AlphaNumericString.length()
                     * Math.random());
 

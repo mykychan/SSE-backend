@@ -73,15 +73,15 @@ public class GestioneNoleggioController {
      * @return ResponseEntity contenente la lista dei noleggi del noleggiante o un messaggio di errore in formato JSON.
      */
     @GetMapping("/noleggiante")
-    public ResponseEntity<String> getNoleggiByNoleggiante(@RequestParam long idUtente) {
+    public ResponseEntity<String> getNoleggiByNoleggiante(@RequestParam final long idUtente) {
 
-        Utente noleggiante = areaPersonaleService.getDatiPrivati(idUtente);
+        final Utente noleggiante = areaPersonaleService.getDatiPrivati(idUtente);
 
         if(noleggiante!=null){
-            List<Noleggio> noleggi = noleggioService.getNoleggiByNoleggiante(noleggiante);
-            List<NoleggioDTO> list = new ArrayList<>();
-            for (Noleggio n: noleggi) {
-                NoleggioDTO item = new NoleggioDTO().convertFromModel(n);
+            final List<Noleggio> noleggi = noleggioService.getNoleggiByNoleggiante(noleggiante);
+            final List<NoleggioDTO> list = new ArrayList<>();
+            for (final Noleggio n: noleggi) {
+                final NoleggioDTO item = new NoleggioDTO().convertFromModel(n);
                 item.setValutazioneAlNoleggiatore(valutazioneService.valutazioneNoleggiatoreIsPresent(n));
                 item.setValutazioneAnnuncio(valutazioneService.valutazioneAnnuncioIsPresent(n));
                 item.setValutazioneAlNoleggiante(valutazioneService.valutazioneNoleggianteIsPresent(n));
@@ -105,15 +105,15 @@ public class GestioneNoleggioController {
      * @return ResponseEntity contenente la lista dei noleggi del noleggiatore o un messaggio di errore in formato JSON.
      */
     @GetMapping("/noleggiatore")
-    public ResponseEntity<String> getNoleggiByNoleggiatore(@RequestParam long idUtente) {
+    public ResponseEntity<String> getNoleggiByNoleggiatore(@RequestParam final long idUtente) {
 
-        Utente noleggiatore = areaPersonaleService.getDatiPrivati(idUtente);
+        final Utente noleggiatore = areaPersonaleService.getDatiPrivati(idUtente);
 
         if(noleggiatore!=null){
-            List<Noleggio> noleggi = noleggioService.getNoleggiByNoleggiatore(noleggiatore);
-            List<NoleggioDTO> list = new ArrayList<>();
-            for (Noleggio n: noleggi) {
-                NoleggioDTO item = new NoleggioDTO().convertFromModel(n);
+            final List<Noleggio> noleggi = noleggioService.getNoleggiByNoleggiatore(noleggiatore);
+            final List<NoleggioDTO> list = new ArrayList<>();
+            for (final Noleggio n: noleggi) {
+                final NoleggioDTO item = new NoleggioDTO().convertFromModel(n);
                 item.setValutazioneAlNoleggiatore(valutazioneService.valutazioneNoleggiatoreIsPresent(n));
                 item.setValutazioneAnnuncio(valutazioneService.valutazioneAnnuncioIsPresent(n));
                 item.setValutazioneAlNoleggiante(valutazioneService.valutazioneNoleggianteIsPresent(n));
@@ -136,15 +136,15 @@ public class GestioneNoleggioController {
      * @return ResponseEntity contenente la lista delle richieste del noleggiante o un messaggio di errore in formato JSON.
      */
     @GetMapping("/richieste/noleggiante")
-    public ResponseEntity<String> getRichiesteByNoleggiante(@RequestParam long idUtente) {
+    public ResponseEntity<String> getRichiesteByNoleggiante(@RequestParam final long idUtente) {
 
-        Utente noleggiante = areaPersonaleService.getDatiPrivati(idUtente);
+        final Utente noleggiante = areaPersonaleService.getDatiPrivati(idUtente);
 
         if(noleggiante!=null){
-            List<Noleggio> noleggi = noleggioService.getRichiesteByNoleggiante(noleggiante);
-            List<NoleggioDTO> list = new ArrayList<>();
-            for (Noleggio n: noleggi) {
-                NoleggioDTO item = new NoleggioDTO().convertFromModel(n);
+            final List<Noleggio> noleggi = noleggioService.getRichiesteByNoleggiante(noleggiante);
+            final List<NoleggioDTO> list = new ArrayList<>();
+            for (final Noleggio n: noleggi) {
+                final NoleggioDTO item = new NoleggioDTO().convertFromModel(n);
                 list.add(item);
             }
             return responseService.Ok(list);
@@ -160,15 +160,15 @@ public class GestioneNoleggioController {
      * @return ResponseEntity contenente la lista delle richieste del noleggiatore o un messaggio di errore in formato JSON.
      */
     @GetMapping("/richieste/noleggiatore")
-    public ResponseEntity<String> getRichiesteByNoleggiatore(@RequestParam long idUtente) {
+    public ResponseEntity<String> getRichiesteByNoleggiatore(@RequestParam final long idUtente) {
 
-        Utente noleggiatore = areaPersonaleService.getDatiPrivati(idUtente);
+        final Utente noleggiatore = areaPersonaleService.getDatiPrivati(idUtente);
 
         if(noleggiatore!=null){
-            List<Noleggio> noleggi = noleggioService.getRichiesteByNoleggiatore(noleggiatore);
-            List<NoleggioDTO> list = new ArrayList<>();
-            for (Noleggio n: noleggi) {
-                NoleggioDTO item = new NoleggioDTO().convertFromModel(n);
+            final List<Noleggio> noleggi = noleggioService.getRichiesteByNoleggiatore(noleggiatore);
+            final List<NoleggioDTO> list = new ArrayList<>();
+            for (final Noleggio n: noleggi) {
+                final NoleggioDTO item = new NoleggioDTO().convertFromModel(n);
                 list.add(item);
             }
             return responseService.Ok(list);
@@ -184,15 +184,15 @@ public class GestioneNoleggioController {
      * @return ResponseEntity contenente le informazioni del noleggio o un messaggio di errore in formato JSON.
      */
     @GetMapping("/visualizza-noleggio")
-    public ResponseEntity<String> getNoleggio(@RequestParam long idNoleggio) {
+    public ResponseEntity<String> getNoleggio(@RequestParam final long idNoleggio) {
 
         try {
-            Noleggio noleggio = noleggioService.getNoleggio(idNoleggio);
-            NoleggioDTO item = new NoleggioDTO().convertFromModel(noleggio);
+            final Noleggio noleggio = noleggioService.getNoleggio(idNoleggio);
+            final NoleggioDTO item = new NoleggioDTO().convertFromModel(noleggio);
 
             return responseService.Ok(item);
 
-        } catch (Exception ex)
+        } catch (final Exception ex)
         {
             return responseService.InternalError();
         }
@@ -205,16 +205,16 @@ public class GestioneNoleggioController {
      * @return ResponseEntity contenente le informazioni del noleggio aggiunto o un messaggio di errore in formato JSON.
      */
     @PostMapping("/aggiungi-noleggio")
-    public ResponseEntity<String> aggiungiNoleggio(@RequestBody NoleggioDTO data){
+    public ResponseEntity<String> aggiungiNoleggio(@RequestBody final NoleggioDTO data){
 
         try {
 
-            Annuncio annuncio = annuncioService.getAnnuncio(data.getAnnuncio()).orElse(null);
+            final Annuncio annuncio = annuncioService.getAnnuncio(data.getAnnuncio()).orElse(null);
             if (annuncio == null) {
                 return responseService.InternalError();
             }
 
-            List<Noleggio> list = noleggioService.checkDisponibilita(annuncio,
+            final List<Noleggio> list = noleggioService.checkDisponibilita(annuncio,
                     Date.valueOf(data.getDataInizio()),
                     Date.valueOf(data.getDataFine()));
 
@@ -237,7 +237,7 @@ public class GestioneNoleggioController {
                 if (item.getNoleggiante() != null && item.getNoleggiatore() != null && item.getAnnuncio() != null) {
                     item = noleggioService.addNoleggio(item);
 
-                    NoleggioDTO noleggioDto = new NoleggioDTO().convertFromModel(item);
+                    final NoleggioDTO noleggioDto = new NoleggioDTO().convertFromModel(item);
 
                     return responseService.Ok(noleggioDto);
                 } else
@@ -245,7 +245,7 @@ public class GestioneNoleggioController {
             } else
                 return responseService.InternalError();
         }
-        catch (Exception ex) {
+        catch (final Exception ex) {
             return responseService.InternalError();
         }
     }
@@ -258,7 +258,7 @@ public class GestioneNoleggioController {
      * @return ResponseEntity contenente le informazioni del noleggio modificato o un messaggio di errore in formato JSON.
      */
     @PostMapping("/salva-noleggio")
-    public ResponseEntity<String> salvaNoleggio(@RequestBody NoleggioDTO data){
+    public ResponseEntity<String> salvaNoleggio(@RequestBody final NoleggioDTO data){
 
         Noleggio item = noleggioService.getNoleggio(data.getId());
         item.setStato(Noleggio.EnumStato.valueOf(data.getStato()));
@@ -273,7 +273,7 @@ public class GestioneNoleggioController {
         if(item.getNoleggiante() != null && item.getNoleggiatore()!= null && item.getAnnuncio() != null){
             item = noleggioService.updateStatoNoleggio(item);
 
-            NoleggioDTO noleggioDTO = new NoleggioDTO().convertFromModel(item);
+            final NoleggioDTO noleggioDTO = new NoleggioDTO().convertFromModel(item);
             return responseService.Ok(noleggioDTO);
         }
         else

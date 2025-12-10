@@ -11,13 +11,13 @@ import java.util.List;
 
 public class JsonHelper {
 
-    public String getJsonFromObject(Object data) {
+    public String getJsonFromObject(final Object data) {
         String json = "";
 
         try {
-            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             json = ow.writeValueAsString(data);
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
         }
         return json;
     }

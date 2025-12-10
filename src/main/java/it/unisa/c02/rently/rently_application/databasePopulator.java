@@ -27,26 +27,26 @@ public class databasePopulator implements CommandLineRunner {
 
 
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(final String... strings) throws Exception {
 
         // Aggiunta degli Utenti
 
 
-        Utente user1 =new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", pswCoder.codificaPassword("password123"), false);
-        Utente user2 =new Utente(2,"user2", "Luca", "Bianchi", "luca.bianchi@email.com", pswCoder.codificaPassword("securePass"), false);
-        Utente user3 =new Utente(3,"user3", "Laura", "Verdi", "laura.verdi@email.com", pswCoder.codificaPassword("pass123"), false);
-        Utente user4 =new Utente(4,"user4", "Alessia", "Neri", "alessia.neri@email.com", pswCoder.codificaPassword("alessia_pass"), false);
-        Utente user5 =new Utente(5,"user5", "Giovanni", "Rosa", "giovanni.rosa@email.com", pswCoder.codificaPassword("rosa123"), false);
-        Utente user6 =new Utente(6,"user6", "Francesca", "Giallo", "francesca.giallo@email.com", pswCoder.codificaPassword("fran_pass"), false);
-        Utente user7 =new Utente(7,"user7", "Marco", "Arancio", "marco.arancio@email.com", pswCoder.codificaPassword("marco_pass"), false);
-        Utente user8 =new Utente(8,"user8", "Elena", "Blu", "elena.blu@email.com", pswCoder.codificaPassword("elena_secure"), false);
-        Utente user9 =new Utente(9,"user9", "Davide", "Marrone", "davide.marrone@email.com", pswCoder.codificaPassword("marrone_pass"), false);
-        Utente user10 =new Utente(10,"user10", "Giulia", "Rosa", "giulia.rosa@email.com", pswCoder.codificaPassword("giulia_secure"), false);
-        Utente user11 =new Utente(11,"user11", "Riccardo", "Azzurro", "riccardo.azzurro@email.com", pswCoder.codificaPassword("azzurro_pass"), false);
-        Utente user12 =new Utente(12,"user12", "Cristina", "Verde", "cristina.verde@email.com", pswCoder.codificaPassword("cristina123"), false);
-        Utente user13 =new Utente(13,"user13", "Paolo", "Viola", "paolo.viola@email.com", pswCoder.codificaPassword("paolo_pass"), true);
-        Utente user14 =new Utente(14,"user14", "Simona", "Rosa", "simona.rosa@email.com", pswCoder.codificaPassword("simona_secure"), true);
-        Utente user15 =new Utente(15,"user15", "Federico", "Giallo", "federico.giallo@email.com", pswCoder.codificaPassword("fede_pass"), true);
+        final Utente user1 =new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com", pswCoder.codificaPassword("password123"), false);
+        final Utente user2 =new Utente(2,"user2", "Luca", "Bianchi", "luca.bianchi@email.com", pswCoder.codificaPassword("securePass"), false);
+        final Utente user3 =new Utente(3,"user3", "Laura", "Verdi", "laura.verdi@email.com", pswCoder.codificaPassword("pass123"), false);
+        final Utente user4 =new Utente(4,"user4", "Alessia", "Neri", "alessia.neri@email.com", pswCoder.codificaPassword("alessia_pass"), false);
+        final Utente user5 =new Utente(5,"user5", "Giovanni", "Rosa", "giovanni.rosa@email.com", pswCoder.codificaPassword("rosa123"), false);
+        final Utente user6 =new Utente(6,"user6", "Francesca", "Giallo", "francesca.giallo@email.com", pswCoder.codificaPassword("fran_pass"), false);
+        final Utente user7 =new Utente(7,"user7", "Marco", "Arancio", "marco.arancio@email.com", pswCoder.codificaPassword("marco_pass"), false);
+        final Utente user8 =new Utente(8,"user8", "Elena", "Blu", "elena.blu@email.com", pswCoder.codificaPassword("elena_secure"), false);
+        final Utente user9 =new Utente(9,"user9", "Davide", "Marrone", "davide.marrone@email.com", pswCoder.codificaPassword("marrone_pass"), false);
+        final Utente user10 =new Utente(10,"user10", "Giulia", "Rosa", "giulia.rosa@email.com", pswCoder.codificaPassword("giulia_secure"), false);
+        final Utente user11 =new Utente(11,"user11", "Riccardo", "Azzurro", "riccardo.azzurro@email.com", pswCoder.codificaPassword("azzurro_pass"), false);
+        final Utente user12 =new Utente(12,"user12", "Cristina", "Verde", "cristina.verde@email.com", pswCoder.codificaPassword("cristina123"), false);
+        final Utente user13 =new Utente(13,"user13", "Paolo", "Viola", "paolo.viola@email.com", pswCoder.codificaPassword("paolo_pass"), true);
+        final Utente user14 =new Utente(14,"user14", "Simona", "Rosa", "simona.rosa@email.com", pswCoder.codificaPassword("simona_secure"), true);
+        final Utente user15 =new Utente(15,"user15", "Federico", "Giallo", "federico.giallo@email.com", pswCoder.codificaPassword("fede_pass"), true);
 
         this.utenteService.save(user1);
         this.utenteService.save(user2);
@@ -67,36 +67,36 @@ public class databasePopulator implements CommandLineRunner {
 
         // Aggiunta degli Annunci
 
-        Annuncio annuncio1 = new Annuncio(1,"Smartphone Samsung", "Via Roma", "Milan", "97534", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-10-05"), user2, null, null);
-        Annuncio annuncio2 = new Annuncio(2,"Libro di Fantascienza", "Corso Magenta", "Torin", "10123", "Romanzo di Isaac Asimov", new BigDecimal("5.00"), "img2.png", Annuncio.EnumCategoria.LIBRI, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-11-15"), user2, null, null);
-        Annuncio annuncio3 = new Annuncio(3,"Lavatrice Whirlpool", "Via Garibaldi", "Roma", "00185", "Lavatrice con centrifuga", new BigDecimal("100.00"), "img3.png", Annuncio.EnumCategoria.ELETTRODOMESTICI, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-01-20"), user4, null, null);
-        Annuncio annuncio4 = new Annuncio(4,"Tagliaerba Bosch", "Via Veneto", "Diamante", "80122", "Tagliaerba elettrico", new BigDecimal("60.00"), "img4.png", Annuncio.EnumCategoria.GIARDINO, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-12-10"), user8, null, null);
-        Annuncio annuncio5 = new Annuncio(5,"Attrezzi da giardinaggio", "Via Dante", "Firenze", "50123", "Kit completo per giardinaggio", new BigDecimal("52.00"), "img5.png", Annuncio.EnumCategoria.GIARDINAGGIO, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-03-07"), user6, null, null);
-        Annuncio annuncio6 = new Annuncio(6,"Quadro moderno", "Via dei Fiori", "Bologna", "40121", "Dipinto astratto su tela", new BigDecimal("65.00"), "img6.png", Annuncio.EnumCategoria.ARTE, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-10-25"), user8, null, null);
-        Annuncio annuncio7 = new Annuncio(7,"Chitarra acustica", "Via 14 Settembre", "Arezzo", "15121", "Chitarra acustica Fender", new BigDecimal("77.00"), "img7.png", Annuncio.EnumCategoria.MUSICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-11-30"), user7, null, null);
-        Annuncio annuncio8 = new Annuncio(8,"Tostapane Bosch", "Via Vittorio Emanuele", "Palermo", "90123", "Tostapane a 4 fette", new BigDecimal("10.00"), "img8.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-02-15"), user12, null, null);
-        Annuncio annuncio9 = new Annuncio(9,"Tapis roulant elettrico", "Via Gambardella", "Catania", "95121", "Tapis roulant, pieghevole con Altoparlante Bluetooth Integrato", new BigDecimal("47.00"), "img9.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-05-12"), user13, null, null);
-        Annuncio annuncio10 = new Annuncio(10,"Computer portatile HP", "Corso Umberto", "Verona", "37123", "Notebook HP con processore i5", new BigDecimal("43.00"), "img10.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-08-03"), user1, null, null);
-        Annuncio annuncio11 = new Annuncio(11,"Tavolo in legno", "Via della Moscova", "Milano", "20121", "Tavolo rettangolare in legno massiccio", new BigDecimal("50.00"), "img11.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-12-20"), user11, null, null);
-        Annuncio annuncio12 = new Annuncio(12,"Scarpe da running", "Via Toledo", "Napoli", "80121", "Scarpe Nike da running, numero 42", new BigDecimal("7.00"), "img12.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-03-25"), user12, null, null);
-        Annuncio annuncio13 = new Annuncio(13,"Fotocamera Canon", "Corso Italia", "Roma", "00192", "Canon EOS 80D con obiettivo", new BigDecimal("95.00"), "img13.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-01-10"), user13, null, null);
-        Annuncio annuncio14 = new Annuncio(14,"Pentola a pressione", "Via Po", "Torino", "10163", "Pentola a pressione in acciaio", new BigDecimal("15.00"), "img14.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-04-18"), user14, null, null);
-        Annuncio annuncio15 = new Annuncio(15,"Bicicletta da corsa", "Corso Garibaldi", "Bologna", "40122", "Bici da corsa Bianchi, taglia L", new BigDecimal("120.00"), "img15.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-07-11"), user15, null, null);
-        Annuncio annuncio16 = new Annuncio(16,"Televisore Samsung", "Via XX Settembre", "Genova", "16121", "TV LED 55 pollici", new BigDecimal("200.00"), "img16.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-11-05"), user1, null, null);
-        Annuncio annuncio17 = new Annuncio(17,"Tavola da surf", "Via Roma", "Cosenza", "90122", "Tavola da surf con accessori", new BigDecimal("150.00"), "img17.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-02-20"), user2, null, null);
-        Annuncio annuncio18 = new Annuncio(18,"Robot da cucina", "Corso Vittorio Emanuele", "Sassari", "95121", "Robot da cucina multifunzione", new BigDecimal("90.00"), "img18.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-10-15"), user3, null, null);
-        Annuncio annuncio19 = new Annuncio(19,"Chitarra elettrica", "Via dei Mille", "Verona", "37123", "Chitarra elettrica Gibson", new BigDecimal("170.00"), "img19.png", Annuncio.EnumCategoria.MUSICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-10-19"), user4, null, null);
-        Annuncio annuncio20 = new Annuncio(20,"About Love", "Via Fusco", "Salerno", "43765", "Libro di storie brevi scritto da Anton Chekhov", new BigDecimal("7.00"), "img20.png", Annuncio.EnumCategoria.LIBRI, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-06-19"), user5, null, null);
-        Annuncio annuncio21 = new Annuncio(21,"MacBook Pro", "Via della Moscova", "Milano", "20821", "MacBook Pro 13 pollici, 2020", new BigDecimal("185.00"), "img21.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-01-05"), user6, null, null);
-        Annuncio annuncio22 = new Annuncio(22,"Giacca nera da ufficio", "Corso Magenta", "Torino", "10123", "Giacca nera da ufficio nera, taglia M da donna", new BigDecimal("10.00"), "img22.png", Annuncio.EnumCategoria.OGGETTISTICAPROFESSIONALE, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-04-15"), user7, null, null);
-        Annuncio annuncio23 = new Annuncio(23,"Forno a microonde", "Via Garibaldi", "Roma", "00185", "Forno a microonde Samsung", new BigDecimal("20.00"), "img23.png", Annuncio.EnumCategoria.ELETTRODOMESTICI, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-12-20"), user8, null, null);
-        Annuncio annuncio24 = new Annuncio(24,"Cassetta degli attrezzi", "Via Veneto", "Catania", "80122", "Cassetta per gli attrezzi vuota della DEWALT", new BigDecimal("20.00"), "img24.png", Annuncio.EnumCategoria.OGGETTISTICAPROFESSIONALE, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-03-01"), user9, null, null);
-        Annuncio annuncio25 = new Annuncio(25,"Tavolo da ping pong", "Via Dante", "Firenze", "50123", "Tavolo da ping pong con accessori", new BigDecimal("60.00"), "img25.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-06-10"), user10, null, null);
-        Annuncio annuncio26 = new Annuncio(26,"Lettore MP3", "Via dei Mille", "Venezia", "40121", "Lettore MP4 Sony", new BigDecimal("7.00"), "img26.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-11-30"), user11, null, null);
-        Annuncio annuncio27 = new Annuncio(27,"Tappeto persiano", "Corso Vittorio Emanuele", "Palermo", "90723", "Tappeto persiano fatto a mano", new BigDecimal("45.00"), "img27.png", Annuncio.EnumCategoria.ARTE, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-02-28"), user12, null, null);
-        Annuncio annuncio28 = new Annuncio(28,"Smartwatch Garmin", "Via XX Settembre", "Genova", "16141", "Smartwatch Garmin Venu", new BigDecimal("48.00"), "img28.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-10-15"), user13, null, null);
-        Annuncio annuncio29 = new Annuncio(29,"Cuffie senza fili", "Corso Italia", "Roma", "00192", "Cuffie Sony WH-1000XM4", new BigDecimal("30.00"), "img29.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-05-20"), user14, null, null);
-        Annuncio annuncio30 = new Annuncio(30,"Bicicletta elettrica", "Via Toledo", "Napoli", "80121", "Bicicletta elettrica Ancheer", new BigDecimal("120.00"), "img30.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-12-05"), user15, null, null);
+        final Annuncio annuncio1 = new Annuncio(1,"Smartphone Samsung", "Via Roma", "Milan", "97534", "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-10-05"), user2, null, null);
+        final Annuncio annuncio2 = new Annuncio(2,"Libro di Fantascienza", "Corso Magenta", "Torin", "10123", "Romanzo di Isaac Asimov", new BigDecimal("5.00"), "img2.png", Annuncio.EnumCategoria.LIBRI, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-11-15"), user2, null, null);
+        final Annuncio annuncio3 = new Annuncio(3,"Lavatrice Whirlpool", "Via Garibaldi", "Roma", "00185", "Lavatrice con centrifuga", new BigDecimal("100.00"), "img3.png", Annuncio.EnumCategoria.ELETTRODOMESTICI, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-01-20"), user4, null, null);
+        final Annuncio annuncio4 = new Annuncio(4,"Tagliaerba Bosch", "Via Veneto", "Diamante", "80122", "Tagliaerba elettrico", new BigDecimal("60.00"), "img4.png", Annuncio.EnumCategoria.GIARDINO, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-12-10"), user8, null, null);
+        final Annuncio annuncio5 = new Annuncio(5,"Attrezzi da giardinaggio", "Via Dante", "Firenze", "50123", "Kit completo per giardinaggio", new BigDecimal("52.00"), "img5.png", Annuncio.EnumCategoria.GIARDINAGGIO, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-03-07"), user6, null, null);
+        final Annuncio annuncio6 = new Annuncio(6,"Quadro moderno", "Via dei Fiori", "Bologna", "40121", "Dipinto astratto su tela", new BigDecimal("65.00"), "img6.png", Annuncio.EnumCategoria.ARTE, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-10-25"), user8, null, null);
+        final Annuncio annuncio7 = new Annuncio(7,"Chitarra acustica", "Via 14 Settembre", "Arezzo", "15121", "Chitarra acustica Fender", new BigDecimal("77.00"), "img7.png", Annuncio.EnumCategoria.MUSICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-11-30"), user7, null, null);
+        final Annuncio annuncio8 = new Annuncio(8,"Tostapane Bosch", "Via Vittorio Emanuele", "Palermo", "90123", "Tostapane a 4 fette", new BigDecimal("10.00"), "img8.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-02-15"), user12, null, null);
+        final Annuncio annuncio9 = new Annuncio(9,"Tapis roulant elettrico", "Via Gambardella", "Catania", "95121", "Tapis roulant, pieghevole con Altoparlante Bluetooth Integrato", new BigDecimal("47.00"), "img9.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-05-12"), user13, null, null);
+        final Annuncio annuncio10 = new Annuncio(10,"Computer portatile HP", "Corso Umberto", "Verona", "37123", "Notebook HP con processore i5", new BigDecimal("43.00"), "img10.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-08-03"), user1, null, null);
+        final Annuncio annuncio11 = new Annuncio(11,"Tavolo in legno", "Via della Moscova", "Milano", "20121", "Tavolo rettangolare in legno massiccio", new BigDecimal("50.00"), "img11.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-12-20"), user11, null, null);
+        final Annuncio annuncio12 = new Annuncio(12,"Scarpe da running", "Via Toledo", "Napoli", "80121", "Scarpe Nike da running, numero 42", new BigDecimal("7.00"), "img12.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-03-25"), user12, null, null);
+        final Annuncio annuncio13 = new Annuncio(13,"Fotocamera Canon", "Corso Italia", "Roma", "00192", "Canon EOS 80D con obiettivo", new BigDecimal("95.00"), "img13.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-01-10"), user13, null, null);
+        final Annuncio annuncio14 = new Annuncio(14,"Pentola a pressione", "Via Po", "Torino", "10163", "Pentola a pressione in acciaio", new BigDecimal("15.00"), "img14.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-04-18"), user14, null, null);
+        final Annuncio annuncio15 = new Annuncio(15,"Bicicletta da corsa", "Corso Garibaldi", "Bologna", "40122", "Bici da corsa Bianchi, taglia L", new BigDecimal("120.00"), "img15.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-07-11"), user15, null, null);
+        final Annuncio annuncio16 = new Annuncio(16,"Televisore Samsung", "Via XX Settembre", "Genova", "16121", "TV LED 55 pollici", new BigDecimal("200.00"), "img16.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-11-05"), user1, null, null);
+        final Annuncio annuncio17 = new Annuncio(17,"Tavola da surf", "Via Roma", "Cosenza", "90122", "Tavola da surf con accessori", new BigDecimal("150.00"), "img17.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-02-20"), user2, null, null);
+        final Annuncio annuncio18 = new Annuncio(18,"Robot da cucina", "Corso Vittorio Emanuele", "Sassari", "95121", "Robot da cucina multifunzione", new BigDecimal("90.00"), "img18.png", Annuncio.EnumCategoria.CASAECUCINA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-10-15"), user3, null, null);
+        final Annuncio annuncio19 = new Annuncio(19,"Chitarra elettrica", "Via dei Mille", "Verona", "37123", "Chitarra elettrica Gibson", new BigDecimal("170.00"), "img19.png", Annuncio.EnumCategoria.MUSICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-10-19"), user4, null, null);
+        final Annuncio annuncio20 = new Annuncio(20,"About Love", "Via Fusco", "Salerno", "43765", "Libro di storie brevi scritto da Anton Chekhov", new BigDecimal("7.00"), "img20.png", Annuncio.EnumCategoria.LIBRI, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-06-19"), user5, null, null);
+        final Annuncio annuncio21 = new Annuncio(21,"MacBook Pro", "Via della Moscova", "Milano", "20821", "MacBook Pro 13 pollici, 2020", new BigDecimal("185.00"), "img21.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-01-05"), user6, null, null);
+        final Annuncio annuncio22 = new Annuncio(22,"Giacca nera da ufficio", "Corso Magenta", "Torino", "10123", "Giacca nera da ufficio nera, taglia M da donna", new BigDecimal("10.00"), "img22.png", Annuncio.EnumCategoria.OGGETTISTICAPROFESSIONALE, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-04-15"), user7, null, null);
+        final Annuncio annuncio23 = new Annuncio(23,"Forno a microonde", "Via Garibaldi", "Roma", "00185", "Forno a microonde Samsung", new BigDecimal("20.00"), "img23.png", Annuncio.EnumCategoria.ELETTRODOMESTICI, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-12-20"), user8, null, null);
+        final Annuncio annuncio24 = new Annuncio(24,"Cassetta degli attrezzi", "Via Veneto", "Catania", "80122", "Cassetta per gli attrezzi vuota della DEWALT", new BigDecimal("20.00"), "img24.png", Annuncio.EnumCategoria.OGGETTISTICAPROFESSIONALE, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-03-01"), user9, null, null);
+        final Annuncio annuncio25 = new Annuncio(25,"Tavolo da ping pong", "Via Dante", "Firenze", "50123", "Tavolo da ping pong con accessori", new BigDecimal("60.00"), "img25.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-06-10"), user10, null, null);
+        final Annuncio annuncio26 = new Annuncio(26,"Lettore MP3", "Via dei Mille", "Venezia", "40121", "Lettore MP4 Sony", new BigDecimal("7.00"), "img26.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.BUONA, Date.valueOf("2027-11-30"), user11, null, null);
+        final Annuncio annuncio27 = new Annuncio(27,"Tappeto persiano", "Corso Vittorio Emanuele", "Palermo", "90723", "Tappeto persiano fatto a mano", new BigDecimal("45.00"), "img27.png", Annuncio.EnumCategoria.ARTE, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-02-28"), user12, null, null);
+        final Annuncio annuncio28 = new Annuncio(28,"Smartwatch Garmin", "Via XX Settembre", "Genova", "16141", "Smartwatch Garmin Venu", new BigDecimal("48.00"), "img28.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-10-15"), user13, null, null);
+        final Annuncio annuncio29 = new Annuncio(29,"Cuffie senza fili", "Corso Italia", "Roma", "00192", "Cuffie Sony WH-1000XM4", new BigDecimal("30.00"), "img29.png", Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.DISCRETA, Date.valueOf("2027-05-20"), user14, null, null);
+        final Annuncio annuncio30 = new Annuncio(30,"Bicicletta elettrica", "Via Toledo", "Napoli", "80121", "Bicicletta elettrica Ancheer", new BigDecimal("120.00"), "img30.png", Annuncio.EnumCategoria.SPORT, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2027-12-05"), user15, null, null);
 
         this.annuncioService.save(annuncio1);
         this.annuncioService.save(annuncio2);
@@ -132,23 +132,23 @@ public class databasePopulator implements CommandLineRunner {
 
         // Aggiunta Noleggio
 
-        Noleggio noleggio1 = new Noleggio(1,Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2027-02-01"), Date.valueOf("2027-02-07"), Date.valueOf("2027-01-28"), user1, user2, annuncio1);
-        Noleggio noleggio2 = new Noleggio(2,Noleggio.EnumStato.CONCLUSO, new BigDecimal("200.00"), Date.valueOf("2027-02-10"), Date.valueOf("2027-02-15"), Date.valueOf("2027-02-07"), user3, user2, annuncio2);
-        Noleggio noleggio3 = new Noleggio(3,Noleggio.EnumStato.CONCLUSO, new BigDecimal("300.00"), Date.valueOf("2027-03-05"), Date.valueOf("2027-03-10"), Date.valueOf("2027-03-02"), user3, user4, annuncio3);
-        Noleggio noleggio4 = new Noleggio(4,Noleggio.EnumStato.CONCLUSO, new BigDecimal("400.00"), Date.valueOf("2027-03-20"), Date.valueOf("2027-03-26"), Date.valueOf("2027-03-16"), user5, user8, annuncio4);
-        Noleggio noleggio5 = new Noleggio(5,Noleggio.EnumStato.CONCLUSO, new BigDecimal("500.00"), Date.valueOf("2027-03-13"), Date.valueOf("2027-03-18"), Date.valueOf("2027-03-10"), user5, user6, annuncio5);
-        Noleggio noleggio6 = new Noleggio(6,Noleggio.EnumStato.CONCLUSO, new BigDecimal("600.00"), Date.valueOf("2027-04-4"), Date.valueOf("2027-04-10"), Date.valueOf("2027-04-3"), user10, user8, annuncio6);
-        Noleggio noleggio7 = new Noleggio(7,Noleggio.EnumStato.CONCLUSO, new BigDecimal("700.00"), Date.valueOf("2027-04-3"), Date.valueOf("2027-04-8"), Date.valueOf("2027-04-2"), user9, user7, annuncio7);
-        Noleggio noleggio8 = new Noleggio(8,Noleggio.EnumStato.CONCLUSO, new BigDecimal("800.00"), Date.valueOf("2027-02-7"), Date.valueOf("2027-02-16"), Date.valueOf("2027-02-4"), user14, user12, annuncio8);
-        Noleggio noleggio9 = new Noleggio(9,Noleggio.EnumStato.CONCLUSO, new BigDecimal("900.00"), Date.valueOf("2027-03-01"), Date.valueOf("2027-03-04"), Date.valueOf("2027-02-27"), user15, user13, annuncio9);
-        Noleggio noleggio10= new Noleggio(10,Noleggio.EnumStato.CONCLUSO,new BigDecimal("99.00"), Date.valueOf("2027-03-09"),Date.valueOf("2027-03-15"), Date.valueOf("2027-03-03"), user10, user1, annuncio10);
-        Noleggio noleggio11 = new Noleggio(11,Noleggio.EnumStato.RICHIESTA, new BigDecimal("650.00"), Date.valueOf("2027-04-4"), Date.valueOf("2027-04-12"), Date.valueOf("2027-04-1"), user1, user2, annuncio1);
-        Noleggio noleggio16 = new Noleggio(16,Noleggio.EnumStato.RICHIESTA, new BigDecimal("600.00"), Date.valueOf("2027-04-02"), Date.valueOf("2027-04-11"), Date.valueOf("2027-03-28"), user1, user2, annuncio2);
-        Noleggio noleggio12= new Noleggio(12,Noleggio.EnumStato.RICHIESTA, new BigDecimal("700.00"), Date.valueOf("2027-04-5"), Date.valueOf("2027-04-8"), Date.valueOf("2027-04-1"), user9, user7, annuncio7);
-        Noleggio noleggio13= new Noleggio(13,Noleggio.EnumStato.RICHIESTA, new BigDecimal("800.00"), Date.valueOf("2027-02-7"), Date.valueOf("2027-02-16"), Date.valueOf("2027-02-4"), user14, user12, annuncio8);
-        Noleggio noleggio14= new Noleggio(14,Noleggio.EnumStato.RICHIESTA, new BigDecimal("900.00"), Date.valueOf("2027-03-01"), Date.valueOf("2027-03-04"), Date.valueOf("2027-02-27"), user15, user13, annuncio9);
-        Noleggio noleggio15= new Noleggio(15,Noleggio.EnumStato.RICHIESTA,new BigDecimal("99.00"), Date.valueOf("2027-03-09"),Date.valueOf("2027-03-15"), Date.valueOf("2027-03-03"), user10, user1, annuncio10);
-        Noleggio noleggio17= new Noleggio(17, Noleggio.EnumStato.CONCLUSO, new BigDecimal("188.00"), Date.valueOf("2027-01-23"), Date.valueOf("2027-01-24"), Date.valueOf("2027-01-23"), user9, user1, annuncio13);
+        final Noleggio noleggio1 = new Noleggio(1,Noleggio.EnumStato.CONCLUSO, new BigDecimal("100.00"), Date.valueOf("2027-02-01"), Date.valueOf("2027-02-07"), Date.valueOf("2027-01-28"), user1, user2, annuncio1);
+        final Noleggio noleggio2 = new Noleggio(2,Noleggio.EnumStato.CONCLUSO, new BigDecimal("200.00"), Date.valueOf("2027-02-10"), Date.valueOf("2027-02-15"), Date.valueOf("2027-02-07"), user3, user2, annuncio2);
+        final Noleggio noleggio3 = new Noleggio(3,Noleggio.EnumStato.CONCLUSO, new BigDecimal("300.00"), Date.valueOf("2027-03-05"), Date.valueOf("2027-03-10"), Date.valueOf("2027-03-02"), user3, user4, annuncio3);
+        final Noleggio noleggio4 = new Noleggio(4,Noleggio.EnumStato.CONCLUSO, new BigDecimal("400.00"), Date.valueOf("2027-03-20"), Date.valueOf("2027-03-26"), Date.valueOf("2027-03-16"), user5, user8, annuncio4);
+        final Noleggio noleggio5 = new Noleggio(5,Noleggio.EnumStato.CONCLUSO, new BigDecimal("500.00"), Date.valueOf("2027-03-13"), Date.valueOf("2027-03-18"), Date.valueOf("2027-03-10"), user5, user6, annuncio5);
+        final Noleggio noleggio6 = new Noleggio(6,Noleggio.EnumStato.CONCLUSO, new BigDecimal("600.00"), Date.valueOf("2027-04-4"), Date.valueOf("2027-04-10"), Date.valueOf("2027-04-3"), user10, user8, annuncio6);
+        final Noleggio noleggio7 = new Noleggio(7,Noleggio.EnumStato.CONCLUSO, new BigDecimal("700.00"), Date.valueOf("2027-04-3"), Date.valueOf("2027-04-8"), Date.valueOf("2027-04-2"), user9, user7, annuncio7);
+        final Noleggio noleggio8 = new Noleggio(8,Noleggio.EnumStato.CONCLUSO, new BigDecimal("800.00"), Date.valueOf("2027-02-7"), Date.valueOf("2027-02-16"), Date.valueOf("2027-02-4"), user14, user12, annuncio8);
+        final Noleggio noleggio9 = new Noleggio(9,Noleggio.EnumStato.CONCLUSO, new BigDecimal("900.00"), Date.valueOf("2027-03-01"), Date.valueOf("2027-03-04"), Date.valueOf("2027-02-27"), user15, user13, annuncio9);
+        final Noleggio noleggio10= new Noleggio(10,Noleggio.EnumStato.CONCLUSO,new BigDecimal("99.00"), Date.valueOf("2027-03-09"),Date.valueOf("2027-03-15"), Date.valueOf("2027-03-03"), user10, user1, annuncio10);
+        final Noleggio noleggio11 = new Noleggio(11,Noleggio.EnumStato.RICHIESTA, new BigDecimal("650.00"), Date.valueOf("2027-04-4"), Date.valueOf("2027-04-12"), Date.valueOf("2027-04-1"), user1, user2, annuncio1);
+        final Noleggio noleggio16 = new Noleggio(16,Noleggio.EnumStato.RICHIESTA, new BigDecimal("600.00"), Date.valueOf("2027-04-02"), Date.valueOf("2027-04-11"), Date.valueOf("2027-03-28"), user1, user2, annuncio2);
+        final Noleggio noleggio12= new Noleggio(12,Noleggio.EnumStato.RICHIESTA, new BigDecimal("700.00"), Date.valueOf("2027-04-5"), Date.valueOf("2027-04-8"), Date.valueOf("2027-04-1"), user9, user7, annuncio7);
+        final Noleggio noleggio13= new Noleggio(13,Noleggio.EnumStato.RICHIESTA, new BigDecimal("800.00"), Date.valueOf("2027-02-7"), Date.valueOf("2027-02-16"), Date.valueOf("2027-02-4"), user14, user12, annuncio8);
+        final Noleggio noleggio14= new Noleggio(14,Noleggio.EnumStato.RICHIESTA, new BigDecimal("900.00"), Date.valueOf("2027-03-01"), Date.valueOf("2027-03-04"), Date.valueOf("2027-02-27"), user15, user13, annuncio9);
+        final Noleggio noleggio15= new Noleggio(15,Noleggio.EnumStato.RICHIESTA,new BigDecimal("99.00"), Date.valueOf("2027-03-09"),Date.valueOf("2027-03-15"), Date.valueOf("2027-03-03"), user10, user1, annuncio10);
+        final Noleggio noleggio17= new Noleggio(17, Noleggio.EnumStato.CONCLUSO, new BigDecimal("188.00"), Date.valueOf("2027-01-23"), Date.valueOf("2027-01-24"), Date.valueOf("2027-01-23"), user9, user1, annuncio13);
 
         this.noleggioService.save(noleggio1);
         this.noleggioService.save(noleggio2);

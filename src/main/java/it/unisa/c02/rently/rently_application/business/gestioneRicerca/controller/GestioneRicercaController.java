@@ -63,11 +63,11 @@ public class GestioneRicercaController {
      * @return ResponseEntity contenente la lista di annunci nel formato JSON.
      */
     @GetMapping("/categoria")
-    public ResponseEntity<String>  searchByCategoria(@RequestParam String categoria) {
-        List<Annuncio> annunci = ricercaService.searchByCategoria(categoria);
-        List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
-        for (Annuncio a: annunci) {
-            AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
+    public ResponseEntity<String>  searchByCategoria(@RequestParam final String categoria) {
+        final List<Annuncio> annunci = ricercaService.searchByCategoria(categoria);
+        final List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
+        for (final Annuncio a: annunci) {
+            final AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
             list.add(item);
         }
         return responseService.Ok(list);
@@ -80,11 +80,11 @@ public class GestioneRicercaController {
      * @return ResponseEntity contenente la lista di annunci nel formato JSON.
      */
     @GetMapping("/condizione")
-    public ResponseEntity<String> searchByCondizione(@RequestParam String condizione) {
-        List<Annuncio> annunci = ricercaService.searchByCondizione(condizione);
-        List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
-        for (Annuncio a: annunci) {
-            AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
+    public ResponseEntity<String> searchByCondizione(@RequestParam final String condizione) {
+        final List<Annuncio> annunci = ricercaService.searchByCondizione(condizione);
+        final List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
+        for (final Annuncio a: annunci) {
+            final AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
             list.add(item);
         }
         return responseService.Ok(list);
@@ -98,11 +98,11 @@ public class GestioneRicercaController {
      * @return ResponseEntity contenente la lista di annunci nel formato JSON.
      */
     @GetMapping("/data")
-    public ResponseEntity<String> searchByData(@RequestParam Date inizio, @RequestParam Date fine) {
-        List<Annuncio> annunci = ricercaService.searchByData(inizio, fine);
-        List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
-        for (Annuncio a: annunci) {
-            AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
+    public ResponseEntity<String> searchByData(@RequestParam final Date inizio, @RequestParam final Date fine) {
+        final List<Annuncio> annunci = ricercaService.searchByData(inizio, fine);
+        final List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
+        for (final Annuncio a: annunci) {
+            final AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
             list.add(item);
         }
         return responseService.Ok(list);
@@ -115,11 +115,11 @@ public class GestioneRicercaController {
      * @return ResponseEntity contenente la lista di annunci nel formato JSON.
      */
     @GetMapping("/descrizione")
-    public ResponseEntity<String> searchByDescrizione(@RequestParam String descrizione) {
-        List<Annuncio> annunci =  ricercaService.searchByDescrizione(descrizione);
-        List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
-        for (Annuncio a: annunci) {
-            AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
+    public ResponseEntity<String> searchByDescrizione(@RequestParam final String descrizione) {
+        final List<Annuncio> annunci =  ricercaService.searchByDescrizione(descrizione);
+        final List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
+        for (final Annuncio a: annunci) {
+            final AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
             list.add(item);
         }
         return responseService.Ok(list);
@@ -132,17 +132,17 @@ public class GestioneRicercaController {
      */
     @GetMapping("/all")
     public ResponseEntity<String> searchAll() {
-        List<Annuncio> annunci =  ricercaService.searchAll();
-        List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
+        final List<Annuncio> annunci =  ricercaService.searchAll();
+        final List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
 
-        String serverAddress = String.format(
+        final String serverAddress = String.format(
                 "%s://%s:%d",
                 httpServletRequest.getScheme(),
                 httpServletRequest.getServerName(),
                 httpServletRequest.getServerPort());
 
-        for (Annuncio a: annunci) {
-            AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
+        for (final Annuncio a: annunci) {
+            final AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
             item.setServerImage(a, serverAddress);
             list.add(item);
         }
@@ -157,17 +157,17 @@ public class GestioneRicercaController {
      */
     @GetMapping("/premium")
     public ResponseEntity<String> searchAnnunciPremium() {
-        List<Annuncio> annunci =  ricercaService.searchAnnunciPremium();
-        List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
+        final List<Annuncio> annunci =  ricercaService.searchAnnunciPremium();
+        final List<AnnuncioDTO> list = new ArrayList<AnnuncioDTO>();
 
-        String serverAddress = String.format(
+        final String serverAddress = String.format(
                 "%s://%s:%d",
                 httpServletRequest.getScheme(),
                 httpServletRequest.getServerName(),
                 httpServletRequest.getServerPort());
 
-        for (Annuncio a: annunci) {
-            AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
+        for (final Annuncio a: annunci) {
+            final AnnuncioDTO item = new AnnuncioDTO().convertFromModel(a);
             item.setServerImage(a, serverAddress);
             list.add(item);
         }

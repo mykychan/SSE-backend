@@ -27,10 +27,10 @@ public class PswCoder {
      * @param password password da codificare
      * @return il risultato della chiamata alla funzione bytesToHex
      */
-    public String codificaPassword (String password) throws NoSuchAlgorithmException {
+    public String codificaPassword (final String password) throws NoSuchAlgorithmException {
 
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        final MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        final byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
         return bytesToHex(encodedhash);
     }
@@ -42,10 +42,10 @@ public class PswCoder {
      * @param hash array di byte devivante dalla password codificata
      * @return la stringa in esadecimale
      */
-    private String bytesToHex(byte[] hash) {
-        StringBuilder hexString = new StringBuilder(2 * hash.length);
+    private String bytesToHex(final byte[] hash) {
+        final StringBuilder hexString = new StringBuilder(2 * hash.length);
         for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
+            final String hex = Integer.toHexString(0xff & hash[i]);
             if(hex.length() == 1) {
                 hexString.append('0');
             }

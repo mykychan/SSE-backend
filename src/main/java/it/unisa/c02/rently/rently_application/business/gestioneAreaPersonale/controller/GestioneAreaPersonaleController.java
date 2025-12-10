@@ -51,7 +51,7 @@ public class GestioneAreaPersonaleController {
      * @return ResponseEntity contenente il profilo dell'utente in formato JSON.
      */
     @GetMapping("/profilo-utente")
-    public ResponseEntity<String> profiloUtente(@RequestParam("id") long id) {
+    public ResponseEntity<String> profiloUtente(@RequestParam("id") final long id) {
 
         Utente utente = null;
         UtenteDTO item = new UtenteDTO();
@@ -65,7 +65,7 @@ public class GestioneAreaPersonaleController {
             else {
                 item = new UtenteDTO().convertFromModel(utente);
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return responseService.InternalError();
         }
 
@@ -79,18 +79,18 @@ public class GestioneAreaPersonaleController {
      * @return ResponseEntity contenente i risultati dell'operazione di modifica.
      */
     @PostMapping("/modifica-dati-utente")
-    public ResponseEntity<String>  modificaUtente(@RequestBody UtenteDTO data) {
+    public ResponseEntity<String>  modificaUtente(@RequestBody final UtenteDTO data) {
 
-        ResponseDTO message = new ResponseDTO();
+        final ResponseDTO message = new ResponseDTO();
         message.message = "I parametri non rispettano le regex";
 
-        HashMap<String, String> tester = new HashMap<>();
+        final HashMap<String, String> tester = new HashMap<>();
         tester.put(data.getEmail(), "^[A-z0-9._%+-]+@[A-z0-9.-]+\\.[A-z]{1,100}$");
         tester.put(data.getUsername(), "^[a-zA-Z0-9.,'-_]{5,100}$");
         tester.put(data.getNome(), "^[\\sa-zA-Z0-9.,'èéòàùì]{1,100}$");
         tester.put(data.getCognome(), "^[\\sa-zA-Z0-9.,'èéòàùì]{1,100}$");
 
-        RegexTester regexTester = new RegexTester();
+        final RegexTester regexTester = new RegexTester();
         if (!regexTester.toTest(tester)) {
             return responseService.InternalError(message);
         }
@@ -99,7 +99,7 @@ public class GestioneAreaPersonaleController {
 
         try {
             if (!data.getNuovaPassword().isEmpty() && !data.getConfermaNuovaPassword().isEmpty()) {
-                PswCoder coder = new PswCoder();
+                final PswCoder coder = new PswCoder();
                 item.setPassword(coder.codificaPassword(data.getNuovaPassword()));
             }
 
@@ -112,7 +112,7 @@ public class GestioneAreaPersonaleController {
             item = areaPersonaleService.updateUtente(item);
 
 
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             return responseService.InternalError();
         }
         return responseService.Ok(item);

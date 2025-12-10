@@ -55,14 +55,14 @@ public class GestioneAnnuncioControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testAggiungiAnnuncio() throws Exception {
 
-        MockMultipartFile imageFile = new MockMultipartFile(
+        final MockMultipartFile imageFile = new MockMultipartFile(
                 "image",
                 "test-image.jpg",
                 "image/jpeg",
                 "img1".getBytes()
         );
 
-        RequestBuilder request = multipart("/api/annuncio/aggiungi-annuncio").file(imageFile)
+        final RequestBuilder request = multipart("/api/annuncio/aggiungi-annuncio").file(imageFile)
                 .param("nome","Smartphone Samsung")
                 .param("strada","Via Roma")
                 .param("citta","Milan")
@@ -74,12 +74,12 @@ public class GestioneAnnuncioControllerTests {
                 .param("dataFine","2024-10-05")
                 .param("idUtente","1");
 
-        Utente mockUtente1 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com",
+        final Utente mockUtente1 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com",
                 "password123", false);
 
         given(areaPersonaleService.getDatiPrivati(anyLong())).willReturn(mockUtente1);
 
-        Annuncio annunciomock = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121",
+        final Annuncio annunciomock = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121",
                 "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg",
                 Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
 
@@ -90,7 +90,7 @@ public class GestioneAnnuncioControllerTests {
         given(storageService.generateRandomFileName()).willReturn("img1");
         doNothing().when(storageService).save(any(MultipartFile.class),any(String.class));
 
-        MockMvc mockMvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        final MockMvc mockMvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 
         mockMvc.perform(request)
@@ -104,14 +104,14 @@ public class GestioneAnnuncioControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testAggiungiAnnuncioReturnServerError() throws Exception {
 
-        MockMultipartFile imageFile = new MockMultipartFile(
+        final MockMultipartFile imageFile = new MockMultipartFile(
                 "image",
                 "test-image.jpg",
                 "image/jpeg",
                 "img1".getBytes()
         );
 
-        RequestBuilder request = multipart("/api/annuncio/aggiungi-annuncio").file(imageFile)
+        final RequestBuilder request = multipart("/api/annuncio/aggiungi-annuncio").file(imageFile)
                 .param("nome","Smartphone Samsung")
                 .param("strada","Via Roma")
                 .param("citta","Milan")
@@ -123,11 +123,11 @@ public class GestioneAnnuncioControllerTests {
                 .param("dataFine","2024-10-05")
                 .param("idUtente","1");
 
-        Utente mockUtente1 = null;
+        final Utente mockUtente1 = null;
 
         given(areaPersonaleService.getDatiPrivati(anyLong())).willReturn(mockUtente1);
 
-        Annuncio annunciomock = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121",
+        final Annuncio annunciomock = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121",
                 "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg",
                 Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
 
@@ -138,7 +138,7 @@ public class GestioneAnnuncioControllerTests {
         given(storageService.generateRandomFileName()).willReturn("img1");
         doNothing().when(storageService).save(any(MultipartFile.class),any(String.class));
 
-        MockMvc mockMvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        final MockMvc mockMvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 
         mockMvc.perform(request)
@@ -151,14 +151,14 @@ public class GestioneAnnuncioControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testAggiungiAnnuncioReturnServerErrorRegex() throws Exception {
 
-        MockMultipartFile imageFile = new MockMultipartFile(
+        final MockMultipartFile imageFile = new MockMultipartFile(
                 "image",
                 "test-image.jpg",
                 "image/jpeg",
                 "img1".getBytes()
         );
 
-        RequestBuilder request = multipart("/api/annuncio/aggiungi-annuncio").file(imageFile)
+        final RequestBuilder request = multipart("/api/annuncio/aggiungi-annuncio").file(imageFile)
                 .param("nome","Smartphone Samsung")
                 .param("strada","Via Roma")
                 .param("citta","Milan")
@@ -171,7 +171,7 @@ public class GestioneAnnuncioControllerTests {
                 .param("idUtente","1");
 
 
-        MockMvc mockMvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        final MockMvc mockMvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 
         mockMvc.perform(request)
@@ -185,22 +185,22 @@ public class GestioneAnnuncioControllerTests {
     @WithMockUser(username = "user1", roles = {"USER"})
      void testAggiungiAnnuncioReturnServerErrorMissingData() throws Exception {
 
-        MockMultipartFile imageFile = new MockMultipartFile(
+        final MockMultipartFile imageFile = new MockMultipartFile(
                 "image",
                 "test-image.jpg",
                 "image/jpeg",
                 "img1".getBytes()
         );
 
-        RequestBuilder request = multipart("/api/annuncio/aggiungi-annuncio").file(imageFile);
+        final RequestBuilder request = multipart("/api/annuncio/aggiungi-annuncio").file(imageFile);
 
 
-        Utente mockUtente1 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com",
+        final Utente mockUtente1 = new Utente(1,"user1", "Mario", "Rossi", "mario.rossi@email.com",
                 "password123", false);
 
         given(areaPersonaleService.getDatiPrivati(anyLong())).willReturn(mockUtente1);
 
-        Annuncio annunciomock = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121",
+        final Annuncio annunciomock = new Annuncio(1, "Smartphone Samsung", "Via Roma", "Milan", "20121",
                 "Telefono in ottime condizioni", new BigDecimal("30.00"), "img1.jpg",
                 Annuncio.EnumCategoria.ELETTRONICA, Annuncio.EnumCondizione.OTTIMA, Date.valueOf("2024-10-05"), mockUtente1, null, null);
 
@@ -211,7 +211,7 @@ public class GestioneAnnuncioControllerTests {
         given(storageService.generateRandomFileName()).willReturn("img1");
         doNothing().when(storageService).save(any(MultipartFile.class),any(String.class));
 
-        MockMvc mockMvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        final MockMvc mockMvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 
         mockMvc.perform(request)

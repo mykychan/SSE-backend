@@ -40,7 +40,7 @@ public class Annuncio {
      * @param noleggi Lista dei noleggi associati all'annuncio.
      * @param valutazioni Lista delle valutazioni dell'oggetto dell'annuncio.
      */
-    public Annuncio(String nome, String strada, String citta, String CAP, String descrizione, BigDecimal prezzo, String immagine, EnumCategoria categoria, EnumCondizione condizione, Date dataFine, Utente utente, List<Noleggio> noleggi, List<ValutazioneOggetto> valutazioni) {
+    public Annuncio(final String nome, final String strada, final String citta, final String CAP, final String descrizione, final BigDecimal prezzo, final String immagine, final EnumCategoria categoria, final EnumCondizione condizione, final Date dataFine, final Utente utente, final List<Noleggio> noleggi, final List<ValutazioneOggetto> valutazioni) {
         this.nome = nome;
         this.strada = strada;
         this.citta = citta;
@@ -73,7 +73,7 @@ public class Annuncio {
      * @param noleggi Lista dei noleggi associati all'annuncio.
      * @param valutazioni Lista delle valutazioni dell'oggetto dell'annuncio.
      */
-    public Annuncio(long id, String nome, String strada, String citta, String CAP, String descrizione, BigDecimal prezzo, String immagine, EnumCategoria categoria, EnumCondizione condizione, Date dataFine, Utente utente, List<Noleggio> noleggi, List<ValutazioneOggetto> valutazioni) {
+    public Annuncio(final long id, final String nome, final String strada, final String citta, final String CAP, final String descrizione, final BigDecimal prezzo, final String immagine, final EnumCategoria categoria, final EnumCondizione condizione, final Date dataFine, final Utente utente, final List<Noleggio> noleggi, final List<ValutazioneOggetto> valutazioni) {
         this.id = id;
         this.nome = nome;
         this.strada = strada;

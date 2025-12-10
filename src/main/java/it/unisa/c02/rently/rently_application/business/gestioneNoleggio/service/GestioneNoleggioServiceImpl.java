@@ -27,7 +27,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public List<Noleggio> getNoleggiByNoleggiante(Utente noleggiante) {
+    public List<Noleggio> getNoleggiByNoleggiante(final Utente noleggiante) {
         return noleggioDAO.findByNoleggiante(noleggiante);
     }
 
@@ -35,7 +35,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public List<Noleggio> getNoleggiByNoleggiatore(Utente noleggiatore) {
+    public List<Noleggio> getNoleggiByNoleggiatore(final Utente noleggiatore) {
         return noleggioDAO.findByNoleggiatore(noleggiatore);
     }
 
@@ -43,7 +43,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public List<Noleggio> getRichiesteByNoleggiante(Utente noleggiante) {
+    public List<Noleggio> getRichiesteByNoleggiante(final Utente noleggiante) {
         return noleggioDAO.findRichiesteByNoleggiante(noleggiante);
     }
 
@@ -51,7 +51,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public List<Noleggio> getRichiesteByNoleggiatore(Utente noleggiatore) {
+    public List<Noleggio> getRichiesteByNoleggiatore(final Utente noleggiatore) {
         return noleggioDAO.findRichiesteByNoleggiatore(noleggiatore);
     }
 
@@ -59,7 +59,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public Noleggio addNoleggio(Noleggio noleggio) {
+    public Noleggio addNoleggio(final Noleggio noleggio) {
         return noleggioDAO.save(noleggio);
     }
 
@@ -67,7 +67,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public void deleteNoleggio(Noleggio noleggio) {
+    public void deleteNoleggio(final Noleggio noleggio) {
         noleggioDAO.deleteById(noleggio.getId());
 
     }
@@ -76,7 +76,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public Noleggio updateStatoNoleggio(Noleggio noleggio) {
+    public Noleggio updateStatoNoleggio(final Noleggio noleggio) {
         return noleggioDAO.save(noleggio);
     }
 
@@ -85,7 +85,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public List<Noleggio> checkDisponibilita(Annuncio annuncio, Date inizio, Date fine) {
+    public List<Noleggio> checkDisponibilita(final Annuncio annuncio, final Date inizio, final Date fine) {
         return noleggioDAO.checkDisponibilita(annuncio, inizio, fine);
     }
 
@@ -93,7 +93,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public Noleggio getNoleggio(long id) {
+    public Noleggio getNoleggio(final long id) {
         return noleggioDAO.findById(id).orElse(null);
     }
 
@@ -102,7 +102,7 @@ public class GestioneNoleggioServiceImpl implements GestioneNoleggioService {
      * {@inheritDoc}
      */
     @Override
-    public List<Noleggio> checkFineNoleggio(Date dateNow) {
+    public List<Noleggio> checkFineNoleggio(final Date dateNow) {
         return noleggioDAO.checkFineNoleggio(dateNow);
     }
 

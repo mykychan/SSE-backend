@@ -27,7 +27,7 @@ public class PswCoderBenchmark {
     @Setup(Level.Trial)
     public void init() throws NoSuchAlgorithmException {
         // input deterministico di lunghezza 'length'
-        char[] chars = new char[length];
+        final char[] chars = new char[length];
         for (int i = 0; i < length; i++) {
             chars[i] = (char) ('a' + (i % 26));
         }
@@ -37,7 +37,7 @@ public class PswCoderBenchmark {
         sha256TL = ThreadLocal.withInitial(() -> {
             try {
                 return MessageDigest.getInstance("SHA-256");
-            } catch (NoSuchAlgorithmException e) {
+            } catch (final NoSuchAlgorithmException e) {
                 throw new IllegalStateException(e);
             }
         });
@@ -47,10 +47,10 @@ public class PswCoderBenchmark {
      * APPROCCIO ATTUALE: crea il digest a ogni chiamata e usa hex manuale
      */
     @Benchmark
-    public void perCall_getInstance_and_manualHex(Blackhole bh) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] encoded = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
-        String out = manualHex(encoded);
+    public void perCall_getInstance_and_manualHex(final Blackhole bh) throws NoSuchAlgorithmException {
+        final MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        final byte[] encoded = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
+        final String out = manualHex(encoded);
         bh.consume(out);
     }
 
@@ -58,11 +58,11 @@ public class PswCoderBenchmark {
      * RIUSO PER THREAD: evita getInstance ad ogni chiamata
      */
     @Benchmark
-    public void threadLocal_digest_and_manualHex(Blackhole bh) {
-        MessageDigest digest = sha256TL.get();
+    public void threadLocal_digest_and_manualHex(final Blackhole bh) {
+        final MessageDigest digest = sha256TL.get();
         digest.reset();
-        byte[] encoded = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
-        String out = manualHex(encoded);
+        final byte[] encoded = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
+        final String out = manualHex(encoded);
         bh.consume(out);
     }
 
@@ -70,19 +70,19 @@ public class PswCoderBenchmark {
      * Conversione HEX moderna (Java 17+)
      */
     @Benchmark
-    public void threadLocal_digest_and_hexFormat(Blackhole bh) {
-        MessageDigest digest = sha256TL.get();
+    public void threadLocal_digest_and_hexFormat(final Blackhole bh) {
+        final MessageDigest digest = sha256TL.get();
         digest.reset();
-        byte[] encoded = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
-        String out = HexFormat.of().formatHex(encoded);
+        final byte[] encoded = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
+        final String out = HexFormat.of().formatHex(encoded);
         bh.consume(out);
     }
 
     // ---- helper identico alla tua implementazione ----
-    private static String manualHex(byte[] hash) {
-        StringBuilder hexString = new StringBuilder(2 * hash.length);
+    private static String manualHex(final byte[] hash) {
+        final StringBuilder hexString = new StringBuilder(2 * hash.length);
         for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
+            final String hex = Integer.toHexString(0xff & hash[i]);
             if (hex.length() == 1) hexString.append('0');
             hexString.append(hex);
         }

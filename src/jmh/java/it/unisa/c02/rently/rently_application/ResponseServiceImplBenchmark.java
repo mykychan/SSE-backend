@@ -57,36 +57,36 @@ public class ResponseServiceImplBenchmark {
 
     /** Ok(Object data): serializzazione + costruzione ResponseEntity con 201 (CREATED). */
     @Benchmark
-    public void ok_with_data(Blackhole bh) {
-        ResponseEntity<String> resp = service.Ok(payload);
+    public void ok_with_data(final Blackhole bh) {
+        final ResponseEntity<String> resp = service.Ok(payload);
         bh.consume(resp);
         // Volendo: bh.consume(resp.getStatusCode()); bh.consume(resp.getBody());
     }
 
     /** Ok(): costruzione ResponseEntity vuoto con 201. */
     @Benchmark
-    public void ok_empty(Blackhole bh) {
-        ResponseEntity<String> resp = service.Ok();
+    public void ok_empty(final Blackhole bh) {
+        final ResponseEntity<String> resp = service.Ok();
         bh.consume(resp);
     }
 
     /** InternalError(Object data): serializzazione + 500. */
     @Benchmark
-    public void internal_with_data(Blackhole bh) {
-        ResponseEntity<String> resp = service.InternalError(payload);
+    public void internal_with_data(final Blackhole bh) {
+        final ResponseEntity<String> resp = service.InternalError(payload);
         bh.consume(resp);
     }
 
     /** InternalError(): costruzione vuota con 500. */
     @Benchmark
-    public void internal_empty(Blackhole bh) {
-        ResponseEntity<String> resp = service.InternalError();
+    public void internal_empty(final Blackhole bh) {
+        final ResponseEntity<String> resp = service.InternalError();
         bh.consume(resp);
     }
 
     // ----------------- Costruzione payload -----------------
 
-    private static Object buildPayload(String type, int size, Random rnd) {
+    private static Object buildPayload(final String type, final int size, final Random rnd) {
         switch (type) {
             case "simple":
                 return makeSimpleMap(size, rnd);
@@ -99,8 +99,8 @@ public class ResponseServiceImplBenchmark {
         }
     }
 
-    private static Map<String, Object> makeSimpleMap(int mult, Random rnd) {
-        Map<String, Object> m = new LinkedHashMap<>();
+    private static Map<String, Object> makeSimpleMap(final int mult, final Random rnd) {
+        final Map<String, Object> m = new LinkedHashMap<>();
         for (int i = 0; i < Math.max(1, mult); i++) {
             m.put("k" + i, "v" + i);
         }
@@ -111,10 +111,10 @@ public class ResponseServiceImplBenchmark {
         return m;
     }
 
-    private static Map<String, Object> makeNestedObject(int mult, Random rnd) {
-        Map<String, Object> root = new LinkedHashMap<>();
+    private static Map<String, Object> makeNestedObject(final int mult, final Random rnd) {
+        final Map<String, Object> root = new LinkedHashMap<>();
         for (int i = 0; i < mult; i++) {
-            Map<String, Object> child = new LinkedHashMap<>();
+            final Map<String, Object> child = new LinkedHashMap<>();
             child.put("val", i);
             child.put("str", "s" + i);
             child.put("meta", makeSimpleMap(Math.max(1, mult / 2), rnd));
@@ -124,8 +124,8 @@ public class ResponseServiceImplBenchmark {
         return root;
     }
 
-    private static List<Map<String, Object>> makeList(int n, Random rnd) {
-        List<Map<String, Object>> list = new ArrayList<>(n);
+    private static List<Map<String, Object>> makeList(final int n, final Random rnd) {
+        final List<Map<String, Object>> list = new ArrayList<>(n);
         for (int i = 0; i < n; i++) {
             list.add(makeSimpleMap(1, rnd));
         }

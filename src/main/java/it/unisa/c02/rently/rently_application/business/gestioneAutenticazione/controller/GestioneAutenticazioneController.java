@@ -59,21 +59,21 @@ public class GestioneAutenticazioneController {
      * @return ResponseEntity contenente l'Utente associato all'indirizzo email e alla password o un messaggio di errore in formato JSON.
      */
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UtenteLoginDTO data) {
+    public ResponseEntity<String> login(@RequestBody final UtenteLoginDTO data) {
 
-        ResponseDTO response = new ResponseDTO();
+        final ResponseDTO response = new ResponseDTO();
         response.message = "Login fallito";
 
         try {
-            String oPassword = new PswCoder().codificaPassword(data.getPassword());
-            Utente utente = autenticazioneService.login(data.getEmail(), oPassword);
+            final String oPassword = new PswCoder().codificaPassword(data.getPassword());
+            final Utente utente = autenticazioneService.login(data.getEmail(), oPassword);
             if (utente != null) {
 
-                UtenteDTO item = new UtenteDTO().convertFromModel(utente);
+                final UtenteDTO item = new UtenteDTO().convertFromModel(utente);
 
-                ObjectNode userNode = new ObjectMapper().convertValue(item, ObjectNode.class);
+                final ObjectNode userNode = new ObjectMapper().convertValue(item, ObjectNode.class);
                 userNode.remove("password");
-                Map claimMap = new HashMap<>(0);
+                final Map claimMap = new HashMap<>(0);
                 claimMap.put("user", userNode);
                 item.setToken(JwtProvider.createJwt(item.getEmail(), claimMap));
 
@@ -81,7 +81,7 @@ public class GestioneAutenticazioneController {
             } else {
                 return responseService.InternalError(response);
             }
-        } catch (Exception ex)
+        } catch (final Exception ex)
         {
             return responseService.InternalError(response);
         }
@@ -95,27 +95,27 @@ public class GestioneAutenticazioneController {
      * @return ResponseEntity contenente l'Utente registrato o un messaggio di errore in formato JSON.
      */
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody UtenteDTO data) throws NoSuchAlgorithmException {
+    public ResponseEntity<String> signUp(@RequestBody final UtenteDTO data) throws NoSuchAlgorithmException {
 
-        ResponseDTO response = new ResponseDTO();
+        final ResponseDTO response = new ResponseDTO();
         response.message = "";
 
 
-        HashMap<String, String> tester = new HashMap<>();
+        final HashMap<String, String> tester = new HashMap<>();
         tester.put(data.getEmail(), "^[A-z0-9._%+-]+@[A-z0-9.-]+\\.[A-z]{1,100}$");
         tester.put(data.getUsername(), "^[a-zA-Z0-9.,'-_]{5,100}$");
         tester.put(data.getNome(), "^[\\sa-zA-Z0-9.,'èéòàùì]{1,100}$");
         tester.put(data.getCognome(), "^[\\sa-zA-Z0-9.,'èéòàùì]{1,100}$");
         tester.put(data.getPassword(),"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
 
-        RegexTester regexTester = new RegexTester();
+        final RegexTester regexTester = new RegexTester();
         if (!regexTester.toTest(tester)) {
             response.message = "I dati inseriti non sono validi";
             return responseService.InternalError(response);
         }
 
         try {
-            Utente utente = new Utente();
+            final Utente utente = new Utente();
             utente.setUsername(data.getUsername());
             utente.setEmail(data.getEmail());
             utente.setPassword( new PswCoder().codificaPassword(data.getPassword()));
@@ -142,16 +142,16 @@ public class GestioneAutenticazioneController {
                 return responseService.InternalError(response);
             }
 
-            UtenteDTO item = new UtenteDTO().convertFromModel(utente);
+            final UtenteDTO item = new UtenteDTO().convertFromModel(utente);
 
-            ObjectNode userNode = new ObjectMapper().convertValue(item, ObjectNode.class);
+            final ObjectNode userNode = new ObjectMapper().convertValue(item, ObjectNode.class);
             userNode.remove("password");
-            Map claimMap = new HashMap<>(0);
+            final Map claimMap = new HashMap<>(0);
             claimMap.put("user", userNode);
             item.setToken(JwtProvider.createJwt(item.getEmail(), claimMap));
 
             return responseService.Ok(item);
-        } catch (Exception ex)
+        } catch (final Exception ex)
         {
             return responseService.InternalError(response);
         }

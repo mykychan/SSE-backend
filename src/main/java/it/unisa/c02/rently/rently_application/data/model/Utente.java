@@ -29,7 +29,7 @@ public class Utente {
      * @param password Password dell'utente.
      * @param premium Indica se l'utente è un utente premium.
      */
-    public Utente(String username, String nome, String cognome, String email, String password, boolean premium) {
+    public Utente(final String username, final String nome, final String cognome, final String email, final String password, final boolean premium) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
@@ -48,7 +48,7 @@ public class Utente {
      * @param password Password dell'utente.
      * @param premium Indica se l'utente è un utente premium.
      */
-    public Utente(long id, String username, String nome, String cognome, String email, String password, boolean premium) {
+    public Utente(final long id, final String username, final String nome, final String cognome, final String email, final String password, final boolean premium) {
         this.id = id;
         this.username = username;
         this.nome = nome;

@@ -31,7 +31,7 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public ValutazioneUtente addValutazioneUtente (ValutazioneUtente valutazione){
+    public ValutazioneUtente addValutazioneUtente (final ValutazioneUtente valutazione){
         return valutazioneUtenteDAO.save(valutazione);
     }
 
@@ -39,7 +39,7 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public void deleteValutazioneUtente(ValutazioneUtente valutazione) {
+    public void deleteValutazioneUtente(final ValutazioneUtente valutazione) {
         valutazioneUtenteDAO.deleteById(valutazione.getId());
     }
 
@@ -47,7 +47,7 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public List<ValutazioneUtente> findAllByUtente(Utente valutato) {
+    public List<ValutazioneUtente> findAllByUtente(final Utente valutato) {
         return valutazioneUtenteDAO.findByValutato(valutato);
     }
 
@@ -55,7 +55,7 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public double mediaValutazioniUtenteByUtente(Utente valutato) {
+    public double mediaValutazioniUtenteByUtente(final Utente valutato) {
         return valutazioneUtenteDAO.mediaValutazioniUtenteById(valutato.getId());
     }
 
@@ -63,7 +63,7 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public ValutazioneOggetto addValutazioneOggetto(ValutazioneOggetto valutazione) {
+    public ValutazioneOggetto addValutazioneOggetto(final ValutazioneOggetto valutazione) {
         return valutazioneOggettoDAO.save(valutazione);
     }
 
@@ -71,7 +71,7 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public void deleteValutazioneOggetto(ValutazioneOggetto valutazione) {
+    public void deleteValutazioneOggetto(final ValutazioneOggetto valutazione) {
         valutazioneOggettoDAO.deleteById(valutazione.getId());
     }
 
@@ -79,7 +79,7 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public List<ValutazioneOggetto> findAllByAnnuncio(Annuncio annuncio) {
+    public List<ValutazioneOggetto> findAllByAnnuncio(final Annuncio annuncio) {
         return valutazioneOggettoDAO.findByAnnuncio(annuncio);
     }
 
@@ -87,7 +87,7 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public double mediaValutazioniOggettoByAnnuncio(Annuncio annuncio) {
+    public double mediaValutazioniOggettoByAnnuncio(final Annuncio annuncio) {
         return valutazioneOggettoDAO.mediaValutazioniOggettoById(annuncio.getId());
     }
 
@@ -95,9 +95,9 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public boolean valutazioneNoleggianteIsPresent(Noleggio n) {
+    public boolean valutazioneNoleggianteIsPresent(final Noleggio n) {
 
-        ValutazioneUtente valutazione = valutazioneUtenteDAO.valutazioneNoleggianteIsPresent(n.getId());
+        final ValutazioneUtente valutazione = valutazioneUtenteDAO.valutazioneNoleggianteIsPresent(n.getId());
         return valutazione != null;
     }
 
@@ -105,9 +105,9 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public boolean valutazioneNoleggiatoreIsPresent(Noleggio n) {
+    public boolean valutazioneNoleggiatoreIsPresent(final Noleggio n) {
 
-        ValutazioneUtente valutazione = valutazioneUtenteDAO.valutazioneNoleggiatoreIsPresent(n.getId());
+        final ValutazioneUtente valutazione = valutazioneUtenteDAO.valutazioneNoleggiatoreIsPresent(n.getId());
         return valutazione != null;
     }
 
@@ -115,9 +115,9 @@ public class GestioneValutazioneServiceImpl implements GestioneValutazioneServic
      * {@inheritDoc}
      */
     @Override
-    public boolean valutazioneAnnuncioIsPresent(Noleggio n) {
+    public boolean valutazioneAnnuncioIsPresent(final Noleggio n) {
 
-        ValutazioneOggetto valutazione = valutazioneOggettoDAO.valutazioneAnnuncioIsPresent(n.getId());
+        final ValutazioneOggetto valutazione = valutazioneOggettoDAO.valutazioneAnnuncioIsPresent(n.getId());
         return valutazione != null;
     }
 }

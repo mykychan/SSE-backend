@@ -31,9 +31,9 @@ public class UtenteDTO {
      * @param nuovaPassword se presente indica la nuova password.
      * @param token token necessario per i servizi di GestioneAutenticazione
      */
-    public UtenteDTO(long id, String username, String nome, String cognome, String email, String password,
-                     String nuovaPassword, String confermaNuovaPassword, boolean premium,
-                     String token) {
+    public UtenteDTO(final long id, final String username, final String nome, final String cognome, final String email, final String password,
+                     final String nuovaPassword, final String confermaNuovaPassword, final boolean premium,
+                     final String token) {
         this.id = id;
         this.username = username;
         this.nome = nome;
@@ -51,9 +51,9 @@ public class UtenteDTO {
      * @param u Utente da convertire in DTO
      * @return il DTO convertito dal Utente
      */
-    public UtenteDTO convertFromModel(Utente u)
+    public UtenteDTO convertFromModel(final Utente u)
     {
-        UtenteDTO item = new UtenteDTO();
+        final UtenteDTO item = new UtenteDTO();
         item.setId(u.getId());
         item.setUsername(u.getUsername());
         item.setNome(u.getNome());
